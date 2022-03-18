@@ -2,17 +2,15 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="flagdle.css">
+    <link rel="stylesheet" href="flagdle_test.css">
     <title>Flag-dle</title>
-    <script src="flagdle.js"></script>
+
 </head>
 
-<body onload=canvasImage()>
+<body>
+    <h1>FLAGDLE</h1>
 
-    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
-        Your browser does not support the HTML canvas tag.</canvas>
-    <canvas id="reponse" width="200" height="100" style="display: none;"></canvas>
-    <input type="button" value="Valider">
+    <input type="button" id="button" value="Valider">
     <!--<img src="https://flagcdn.com/w640/az.png"
         srcset="https://flagcdn.com/w1280/az.png 2x" width="640" alt="Hungary">-->
     <div id="chosenColor"></div>
@@ -47,6 +45,7 @@
         <div id="#FFFFFF" class="color" style="background-color: rgb(200, 200, 200);"></div>
         <div id="#000000" class="color" style="background-color: rgb(200, 200, 200);"></div>
     </div>
+    <script src="flagdle_test.js"></script>
 </body>
 
 </html>

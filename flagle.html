@@ -1,0 +1,113 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="flagle.css">
+    <title>Flagle</title>
+
+</head>
+
+<body>
+    <h1><span id="F">F</span><span id="L">L</span><span id="A">A</span><span id="G">G</span><span id="L2">L</span><span
+            id="E">E</span></h1>
+    <h2 id="nbrC">Il y a couleurs à trouver</h2>
+    <div id="test">
+        <div id="CANVAS">
+            <div id="grosCANVA">
+                <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
+                    Your browser does not support the HTML canvas tag.</canvas>
+                <canvas id="reponse" width="200" height="100" style="display: none;"></canvas>
+            </div>
+            <div id="miniCANVA">
+                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+            </div>
+        </div>
+    </div>
+    <div id="subDiv">
+        <input type="button" id="button" value="Valider">
+        <!--<img src="https://flagcdn.com/w640/az.png"
+        srcset="https://flagcdn.com/w1280/az.png 2x" width="640" alt="Hungary">-->
+
+    </div>
+    <div id="DivMain">
+        <div id="#FFC0CB" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FF0000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#800000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#A52A2A" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FA8072" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FF4500" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#D2691E" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFA500" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFD700" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFFF00" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#808000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#9ACD32" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#7FFF00" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#008000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#40E0D0" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#00FFFF" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#008080" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#0000FF" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#000080" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#8A2BE2" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#DDA0DD" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FF00FF" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#800080" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#D2B48C" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#F5F5DC" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#808080" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#2F4F4F" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFFFFF" class="color" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#000000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+    </div>
+    <div id="DivMain2">
+        <div id="#FFC0CB." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FF0000." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#800000." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#A52A2A." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FA8072." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FF4500." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#D2691E." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFA500." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFD700." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFFF00." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#808000." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#9ACD32." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#7FFF00." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#008000." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#40E0D0." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#00FFFF." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#008080." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#0000FF." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#000080." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#8A2BE2." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#DDA0DD." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FF00FF." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#800080." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#D2B48C." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#F5F5DC." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#808080." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#2F4F4F." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#FFFFFF." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+        <div id="#000000." class="colore" style="background-color: rgb(200, 200, 200);"></div>
+    </div>
+    <div id="chosenColor" width="10"></div>
+    <div id="guessCountry">
+        <input type="text" name="" id="search" placeholder="France" list="pays">
+        <datalist id="pays">
+
+        </datalist>
+        <input type="button" id="button2" value="Valider">
+    </div>
+    <div id="resultat">
+
+    </div>
+
+    <script src="flagle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+
+.img {
+    border: 2px solid;
+}
+
+#divMain {
+    display:flex;
+    
+}
+
+#divMain2 {
+    display:flex;
+    
+}
+
+.color {
+    width: 50px; 
+    height: 50px;
+    margin: auto;
+    border: solid 1px;
+    transition: .5s;
+}
+
+
+.colore {
+    width: 50px; 
+    height: 20px;
+    margin: auto;
+    border: solid 1px;
+    margin-bottom: 10px;
+    transition: .5s;
+
+}
+
+canvas {
+    display: flex;
+    margin: auto;
+}
+
+#button {
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#button2 {
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+#chosenColor {
+    height: 50px;
+    background-color: rgb(200, 200, 200);
+    border: solid 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10%;
+    
+    margin: auto;
+}
+#subDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#CANVAS {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    text-align: center;
+    color: white;
+}
+
+body {
+    margin: auto;
+}
+
+#guessCountry {
+    margin-top: 10px;
+    margin:  0 auto;
+    width: 50%;
+    text-align: center;
+    display: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+#search {
+    width: 50%;
+}
+
+
+ul {
+    background-color: white;
+    text-align: center;
+    
+}
+
+#reponse {
+    opacity: 0;
+    animation-name: fadeIn; 
+    animation-duration: 5s;
+    animation-delay: .5s;
+    animation-fill-mode: forwards;
+    
+  }
+  @keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+  }
+  
+  #resultat {
+    margin: auto;
+    display: none;
+    opacity: 0;
+    animation-name: fadeIn; 
+    animation-duration: 5s;
+    animation-delay: .5s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+  }
+
+  .blockCol {
+      width: 50px;
+      height: 50px;
+      border: solid 1px black;
+      margin-left: 5px;
+      border-radius: 10px;
+  }
+
+  #rejouer {
+      margin: auto;
+  }
+  
+  #star-five {
+    margin-left: 5px;
+    margin-top: 20px;
+    position: relative;
+    display: block;
+    color: #55caf6;
+    width: 0px;
+    height: 0px;
+    border-right: 20px solid transparent;
+    border-bottom: 14px solid #55caf6;
+    border-left: 20px solid transparent;
+    transform: rotate(35deg);
+  }
+  #star-five:before {
+    border-bottom: 16px solid #55caf6;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -9px;
+    left: -13px;
+    display: block;
+    content: '';
+    transform: rotate(-35deg);
+  }
+  #star-five:after {
+    position: absolute;
+    display: block;
+    color: #55caf6;
+    top: 0.6px;
+    left: -21px;
+    width: 0px;
+    height: 0px;
+    border-right: 20px solid transparent;
+    border-bottom: 14px solid #55caf6;
+    border-left: 20px solid transparent;
+    transform: rotate(-70deg);
+    content: '';
+  }
