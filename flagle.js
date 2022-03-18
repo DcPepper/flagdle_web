@@ -528,7 +528,7 @@ function game() {
             document.getElementById("reponse").style["display"] = "flex"
         } else if (V == 5) {
             h2 = document.querySelector("h2")
-            h2.innerHTML = "Dommage ! Tu feras mieux demain ! 💪\nCe drapeau est: Turkmenistan"
+            h2.innerHTML = "Dommage ! Tu feras mieux demain ! 💪\nCe drapeau est: " + CHOSENPAY
             document.getElementById("myCanvas").style["display"] = "none"
             document.getElementById("reponse").style["display"] = "flex"
         }
