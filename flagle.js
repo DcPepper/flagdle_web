@@ -531,6 +531,10 @@ function game() {
             h2.innerHTML = "Dommage ! Tu feras mieux demain ! 💪\nCe drapeau est: " + CHOSENPAY
             document.getElementById("myCanvas").style["display"] = "none"
             document.getElementById("reponse").style["display"] = "flex"
+            document.getElementById("DivMain").style["display"] = "none"
+            document.getElementById("DivMain2").style["display"] = "none"
+            document.getElementById("chosenColor").style["display"] = "none"
+            document.getElementById("resultat").style["display"] = "block"
         }
 
     }
