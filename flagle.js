@@ -336,7 +336,7 @@ function game() {
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
         } else {
             h2 = document.querySelector("h2")
-            h2.innerHTML = "Dommage ! C'est bien le drapeau de " + CHOSENPAY
+            h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY
         }
 
         document.getElementById("resultat").style["display"] = "block"
