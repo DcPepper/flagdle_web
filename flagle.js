@@ -179,7 +179,6 @@ function game() {
         , "#FF00FF"
         , "#800080"
         , "#D2B48C"
-        , "#F5F5DC"
         , "#808080"
         , "#2F4F4F"
         , "#FFFFFF"
@@ -212,26 +211,31 @@ function game() {
     couleurs = {}
     image.onload = function () {
 
-
-        canvasHidden.width = this.width;
-        canvasHidden.height = this.height;
-        canvas.width = Math.floor(this.width);
-
-        canvas.height = Math.floor(this.height);
-        ctx2.drawImage(this, 0, 0, Math.floor(this.width), Math.floor(this.height));
-        ctx.drawImage(this, 0, 0, Math.floor(this.width), Math.floor(this.height));
+        height = Math.min(this.height, window.innerHeight / 2)
+        width = this.width * (height / this.height)
+        canvasHidden.width = width;
+        canvasHidden.height = height;
+        canvas.width = width;
+        canvas.height = height;
+        ctx2.drawImage(this, 0, 0, width, height);
+        ctx.drawImage(this, 0, 0, width, height);
         var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
+        un = new Date();
         var pixels = data["data"];
 
         miniCanvas = document.getElementsByClassName("mini");
+
         for (can of miniCanvas) {
             can.width = Math.floor(canvas.width / 5)
             can.height = Math.floor(canvas.height / 5)
+
+
         }
         for (var i = 0; i < pixels.length; i += 4) {
             pixelsCol.push(pixels.slice(i, i + 4));
         }
+
+        console.log(pixelsCol.length)
 
 
         for (var i = 0; i < pixelsCol.length; i++) {
@@ -240,26 +244,19 @@ function game() {
             var g = col[1];
             var b = col[2];
             var str = [r, g, b].join();
-            if (Object.keys(couleurs).includes(str)) {
-                couleurs[str] += 1;
-            } else {
-                couleurs[str] = 1;
-            }
+            couleurs[str] = couleurs[str] ? couleurs[str] + 1 : 1;
         }
-
-        console.log(couleurs)
+        console.log(Object.keys(couleurs).length)
+        console.log(new Date() - un)
         for (var i = 0; i < Object.entries(couleurs).length; i++) {
-            if (canvas.width * canvas.height >= 250000) {
-                if (Object.entries(couleurs)[i][1] > 2561) {
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            } else {
-                if (Object.entries(couleurs)[i][1] > 2000) {
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
+
+            if (Object.entries(couleurs)[i][1] > 900) {
+                trueColor.push(Object.entries(couleurs)[i][0]);
             }
+
         }
         spectreCol(trueColor)
+        console.log(new Date() - un)
 
         for (var i = 0; i < pixelsCol.length; i++) {
             var col = pixelsCol[i];
@@ -278,6 +275,7 @@ function game() {
         classColor2 = document.getElementsByClassName("colore")
         for (divElt of classColor) {
             divElt.style["width"] = canvas.width / classColor.length
+            /*
             divElt.addEventListener("mouseover", function (event) {
                 this.style["width"] = canvas.width * 2 / classColor.length
                 id = this.id;
@@ -298,24 +296,29 @@ function game() {
                 divElt2 = document.getElementById(id)
                 divElt2.style["width"] = canvas.width / classColor.length
             });
+            */
         }
         for (divElt of classColor2) {
             divElt.style["width"] = canvas.width / classColor2.length
         }
-        pixels = pixelsCol.flat();
-
-        var newData = Uint8ClampedArray.from(pixels)
-        var newDatas = ctx.createImageData(canvas.width, canvas.height);
-        for (var i = 0; i < newData.length; i++) {
-            newDatas.data[i] = newData[i]
+        newPixels = []
+        for (elt of pixelsCol) {
+            for (c of elt) {
+                newPixels.push(c);
+            }
         }
 
-        ctx.putImageData(newDatas, 0, 0);
+
+        for (var i = 0; i < newPixels.length; i++) {
+            data["data"][i] = newPixels[i];
+        }
+
+        ctx.putImageData(data, 0, 0);
 
         console.log(document.getElementById("myCanvas").width)
         console.log(document.getElementById("myCanvas").height)
 
-
+        console.log(new Date() - un)
     }
 
 
@@ -335,6 +338,7 @@ function game() {
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].appendChild(star)
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
         } else {
+            document.cookie = -1;
             h2 = document.querySelector("h2")
             h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY
         }
@@ -513,6 +517,8 @@ function game() {
 
 
         if (good_colors.length == trueColor.length) {
+            document.getElementById("search").value = "";
+            document.getElementById('search').focus();
             h2 = document.querySelector("h2")
             h2.innerHTML = "Bravo ! Rendez-vous demain pour le prochain défi 🚀\nPouvez vous deviner à qui appartient ce drapeau?"
             document.getElementById("DivMain").style["display"] = "none"
@@ -527,6 +533,7 @@ function game() {
             document.getElementById("myCanvas").style["display"] = "none"
             document.getElementById("reponse").style["display"] = "flex"
         } else if (V == 5) {
+            document.cookie = -1;
             h2 = document.querySelector("h2")
             h2.innerHTML = "Dommage ! Tu feras mieux demain ! 💪\nCe drapeau est: " + CHOSENPAY
             document.getElementById("myCanvas").style["display"] = "none"
@@ -584,7 +591,7 @@ function game() {
     p = Math.random()
     index = Math.floor(p * (colors.length - 1))
     col = colors[index]
-    document.getElementById("L2").style["color"] = col
+    document.getElementById("L2").style["color"] = col;
 }
 
 open = document.getElementById('open')
@@ -601,5 +608,11 @@ close.addEventListener('click', () => {
     modal.style['display'] = "none";
 })
 
-
+document.cookie = document.cookie ? parseInt(document.cookie) + 1 : 0;
+if (parseInt(document.cookie) < 2) {
+    document.getElementById("serie").innerHTML = "Nombre de drapeau d'affilé deviné: " + document.cookie;
+}
+else {
+    document.getElementById("serie").innerHTML = "Nombre de drapeaux d'affilé devinés: " + document.cookie;
+}
 game()
