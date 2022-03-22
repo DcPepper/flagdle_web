@@ -10,6 +10,22 @@
     
 }
 
+input {
+    background-color: #39393c;
+    font-weight: bold;
+    color: white;
+    width: 80px;
+    border: #39393c solid 1px;
+    border-radius: 10px;
+    transition: background-color color;
+    transition-duration: .5s;
+}
+
+input:hover{
+    background-color: white;
+    color: black;
+}
+
 #divMain2 {
     position: absolute;
     left: 20%;
@@ -98,8 +114,21 @@ h2 {
     font-size: 1em;
 }
 
+#home {
+    position: absolute;
+    left: 10%;
+    background-color: black;
+    color: white;
+    width: 50px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    top: 2px;
+}
+
 body {
+    font-family: 'Courier New', Courier, monospace;
     margin: auto;
+    background-color:  rgb( 1, 33, 105);
 }
 
 #guessCountry {
@@ -207,13 +236,14 @@ ul {
   }
 
 #F, #L, #A, #G, #L2, #E {
-    color: black;
-    font-size: 1.2em;
+    color: white;
+    font-size: 1em;
 }
   #page-header {
+      height: 9%;
       margin-top: -26px;
       width: 100%;
-      background-color: #39393c;
+      background-color: #090f39;
   }
 
   .mini {
@@ -235,8 +265,8 @@ ul {
      position: absolute;
      border-radius: 5px;
      
-     font-size: 1em;
-     top: 1px;
+     font-size: 0.9em;
+     top: 2px;
      width: 50px;
      left: 5%;
      
