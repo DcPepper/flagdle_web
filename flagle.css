@@ -15,6 +15,9 @@ input {
     font-weight: bold;
     color: white;
     width: 80px;
+    overflow: hidden;
+    min-height: 5px;
+    min-width: 5px;
     border: #39393c solid 1px;
     border-radius: 10px;
     transition: background-color color;
@@ -240,7 +243,8 @@ ul {
     font-size: 1em;
 }
   #page-header {
-      height: 9%;
+      overflow: hidden;
+      
       margin-top: -26px;
       width: 100%;
       background-color: #090f39;
