@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="flagle.css">
+    <link rel="stylesheet" href="flagle.scss">
     <title>Flagle</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
 
@@ -13,7 +13,8 @@
 
         <h1> <input type="button" id="open" value="?"><input type="button" id="home" value="X"
                 onclick="window.location.href='index.html'"><span id="F">F</span><span id="L">L</span><span
-                id="A">A</span><span id="G">G</span><span id="L2">L</span><span id="E">E</span></h1>
+                id="A">A</span><span id="G">G</span><span id="L2">L</span><span id="E">E</span> <input type="button"
+                id="stat" value="📈"> </h1>
 
     </header>
 
@@ -143,8 +144,9 @@
         <input type="button" id="button2" value="Valider">
     </div>
     <div id="resultat">
-
     </div>
+    <textarea id="clipboard"></textarea>
+
 
 
 
@@ -163,7 +165,8 @@
                     <span style="padding-left: 10px;">3. Recommencer les étapes 1. et 2. pour toutes les couleurs que
                         vous souhaitez deviner.<br></span>
                 </p>
-                <img src="couleurs.png" alt="couleurs" style="padding-left: 40%;">
+                <img src="2022-03-25_11-05-40__online-video-cutter_com__AdobeCreativeCloudExpress.gif" alt="couleurs"
+                    style="padding-left: 30%;">
                 <p style="padding-left: 5px;">
                     <span style="text-decoration: underline;">Légende:</span> <span
                         style="color: green;">vert:</span>couleur bien placée, <span
@@ -187,6 +190,31 @@
         </div>
     </div>
 
+    <div class="modal" id="modal2">
+        <div class="regles">
+            <div id="stats" style="width: 100%;">
+                <span style="font-weight: bold;">Statistiques</span>
+                <div style="border-top: solid white 1px; width: 100%;"></div>
+                <p id="about">
+                    <span style="text-decoration: underline ;">Parties: </span><span id="Parties"></span><br>
+                    1/6: <span id="1/6"></span><br>
+                    2/6: <span id="2/6"></span><br>
+                    3/6: <span id="3/6"></span><br>
+                    4/6: <span id="4/6"></span><br>
+                    5/6: <span id="5/6"></span><br>
+                    6/6: <span id="6/6"></span><br>
+                    -/6: <span id="-/6"></span><br>
+                    <br>
+                    🟩: <span id="oui"></span>, 🟨: <span id="presque"></span>, ⬛: <span id="non"></span>, 🔷: <span
+                        id="top"></span>
+                </p>
+            </div>
+            <button id="close2">X</button>
+        </div>
+    </div>
+    <footer id="foot"> Suis-moi sur <a href="https://www.twitter.com/dcp3pper"
+            style="margin-left: 10px; margin-right: 10px;">Twitter</a> et <a href="https://www.twitch.com/dcp3pper"
+            style="margin-left: 10px; margin-right: 10px;">Twitch</a>!</footer>
     <script src="daily.js"></script>
 
 </body>

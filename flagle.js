@@ -69,6 +69,8 @@ function game() {
         boutonColor = document.getElementById("chosenColor")
         couleursplit = chosenColor.split(',')
         boutonColor.style["background-color"] = "rgb(" + couleursplit[0] + "," + couleursplit[1] + "," + couleursplit[2] + ")"
+        boutonColor.style["width"] = "50%";
+
     }
 
     xglobal = 0
@@ -144,6 +146,8 @@ function game() {
 
             chosenColor = ""
             boutonColor.style["background-color"] = "rgb(200,200,200)"
+            boutonColor.style["width"] = "10%";
+
         }
     }
 
@@ -254,12 +258,79 @@ function game() {
             couleurs[str] = couleurs[str] ? couleurs[str] + 1 : 1;
         }
         console.log(Object.keys(couleurs).length)
-        console.log(new Date() - un)
+        console.log(couleurs)
+
+        for (colEntry of Object.entries(couleurs)) {
+            if (colEntry[1] * 100 / (height * width) < 0.5) {
+                delete couleurs[colEntry[0]];
+            }
+        }
         for (var i = 0; i < Object.entries(couleurs).length; i++) {
 
-            if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 1) {
-                console.log({ "col": Object.entries(couleurs)[i] })
-                trueColor.push(Object.entries(couleurs)[i][0]);
+            if (CHOSENPAYISO.toLowerCase() == "ar") {
+                if (Object.entries(couleurs)[i][1] > 1450) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            } else if (CHOSENPAYISO.toLowerCase() == "aw") {
+                if (Object.entries(couleurs)[i][1] > 2680) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "br") {
+                if (Object.entries(couleurs)[i][1] > 2380) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "ky") {
+                if (Object.entries(couleurs)[i][1] > 1500) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "fj") {
+                if (Object.entries(couleurs)[i][1] > 1450) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "gt") {
+                if (Object.entries(couleurs)[i][1] > 800) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "lr") {
+                if (Object.entries(couleurs)[i][1] > 3000) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "mp") {
+                if (Object.entries(couleurs)[i][1] > 3000) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "sm") {
+                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "tk") {
+                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else {
+                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 1) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
             }
 
         }
@@ -283,32 +354,12 @@ function game() {
         classColor = document.getElementsByClassName("color")
         classColor2 = document.getElementsByClassName("colore")
         for (divElt of classColor) {
-            divElt.style["width"] = canvas.width / classColor.length
-            /*
-            divElt.addEventListener("mouseover", function (event) {
-                this.style["width"] = canvas.width * 2 / classColor.length
-                id = this.id;
-                if (Object.keys(changeID).includes(id.toLowerCase())) {
-                    id = changeID[id.toLowerCase()].toUpperCase()
-                }
-                id = id + "."
-                divElt2 = document.getElementById(id)
-                divElt2.style["width"] = canvas.width * 2 / classColor.length
-            });
-            divElt.addEventListener("mouseleave", function (event) {
-                this.style["width"] = canvas.width / classColor.length
-                id = this.id;
-                if (Object.keys(changeID).includes(id.toLowerCase())) {
-                    id = changeID[id.toLowerCase()].toUpperCase()
-                }
-                id = id + "."
-                divElt2 = document.getElementById(id)
-                divElt2.style["width"] = canvas.width / classColor.length
-            });
-            */
+            divElt.style["width"] = canvas.width * 2 / classColor.length
+            divElt.style["height"] = canvas.width * 2 / classColor.length
         }
         for (divElt of classColor2) {
-            divElt.style["width"] = canvas.width / classColor2.length
+            divElt.style["width"] = canvas.width * 3 / classColor2.length
+            divElt.style["height"] = canvas.width * 3 / classColor2.length
         }
         newPixels = []
         for (elt of pixelsCol) {
@@ -352,7 +403,7 @@ function game() {
             }
             document.cookie = String(cookie) + "&0"
             h2 = document.querySelector("h2")
-            h2.innerHTML = "Impressionnant ! En effet, c'est bien le drapeau de " + CHOSENPAY
+            h2.innerHTML = "Bonne réponse ! (" + CHOSENPAY + ")";
 
             star = document.createElement("div")
             star.id = "star-five"
@@ -380,6 +431,7 @@ function game() {
         document.getElementById("rejouer").style["display"] = "flex"
         document.getElementById("rejouer").style["margin-top"] = "10px"
         document.getElementById("resultat").style["display"] = "block"
+        document.getElementById("resultat").style["margin-top"] = "5vh"
     }
 
     totalTries = [];
@@ -430,6 +482,9 @@ function game() {
 
                 bout = document.getElementById(col3)
                 bout.style["background-color"] = "black"
+                bout.classList.add("wrong")
+
+
             } else if (usedColor[key] == key) {
                 col = usedColor[key]
                 col3 = col.split(',').slice(0, 3).reduce(function (y, x) {
@@ -444,6 +499,13 @@ function game() {
 
                 bout = document.getElementById(col3)
                 bout.style["background-color"] = "#67e56d"
+                if (bout.classList.length > 1) {
+                    if (bout.classList[1] == "almost") {
+                        bout.classList.remove("almost");
+                    }
+                }
+                bout.classList.add("good")
+
                 if (!good_colors.includes(usedColor[key])) {
                     good_colors.push(usedColor[key])
                 }
@@ -465,7 +527,7 @@ function game() {
                 if (!almost_colors.includes(usedColor[key])) {
                     almost_colors.push(usedColor[key])
                 }
-
+                bout.classList.add("almost")
 
 
             }
@@ -567,12 +629,13 @@ function game() {
             document.getElementById("search").value = "";
             document.getElementById('search').focus();
             h2 = document.querySelector("h2")
-            h2.innerHTML = "Bravo ! Rendez-vous demain pour le prochain défi 🚀\nPouvez vous deviner à qui appartient ce drapeau?"
+            h2.innerHTML = "Bravo ! Quel est le nom de ce drapeau?"
             document.getElementById("DivMain").style["display"] = "none"
             document.getElementById("DivMain2").style["display"] = "none"
             document.getElementById("chosenColor").style["display"] = "none"
             document.getElementById("button").style["display"] = "none"
             document.getElementById("guessCountry").style["display"] = "block"
+            document.getElementById("guessCountry").style["height"] = "5vh"
 
             btn = document.getElementById("button2")
             btn.addEventListener('click', validerCountry);
@@ -582,13 +645,14 @@ function game() {
         } else if (V == 5) {
             document.cookie = -1;
             h2 = document.querySelector("h2")
-            h2.innerHTML = "Dommage ! Tu feras mieux demain ! 💪\nCe drapeau est: " + CHOSENPAY
+            h2.innerHTML = "Dommage ! Ce drapeau est: " + CHOSENPAY
             document.getElementById("myCanvas").style["display"] = "none"
             document.getElementById("reponse").style["display"] = "flex"
             document.getElementById("DivMain").style["display"] = "none"
             document.getElementById("DivMain2").style["display"] = "none"
             document.getElementById("chosenColor").style["display"] = "none"
             document.getElementById("resultat").style["display"] = "block"
+            document.getElementById("resultat").style["margin-top"] = "5vh"
             rejouer = document.createElement('input');
             rejouer.type = "button"
             rejouer.id = "rejouer"
@@ -606,7 +670,7 @@ function game() {
     document.body.style["backgroundColor"] = "rgb( 1, 33, 105);"
 
     countries = {
-        'Afghanistan ': 'AF', 'Afrique du Sud ': 'ZA', 'Åland, Îles ': 'AX', 'Albanie ': 'AL', 'Algérie ': 'DZ', 'Allemagne ': 'DE', 'Andorre ': 'AD', 'Angola ': '', 'Anguilla ': 'AI', 'Antarctique ': 'AQ', 'Antigua et Barbuda ': 'AG', 'Arabie Saoudite ': 'SA', 'Argentine ': 'AR', 'Arménie ': 'AM', 'Aruba ': 'AW', 'Australie ': 'AU', 'Autriche ': 'AT', 'Azerbaïdjan ': 'AZ', 'Bahamas ': 'BS', 'Bahrein ': 'BH', 'Bangladesh ': 'BD', 'Barbade ': 'BB', 'Bélarus ': 'BY', 'Belgique ': 'BE', 'Bélize ': 'BZ', 'Bénin ': 'BJ', 'Bermudes ': 'BM', 'Bhoutan ': 'BT', 'Bolivie(État plurinational de) ': 'BO', 'Bonaire, Saint- Eustache et Saba ': 'BQ', 'Bosnie - Herzégovine ': 'BA', 'Botswana ': 'BW', 'Brésil ': 'BR', 'Brunéi Darussalam ': 'BN', 'Bulgarie ': 'BG', 'Burkina Faso ': 'BF', 'Burundi ': 'BI', 'Cabo Verde ': 'CV', 'Caïmans, Iles ': 'KY', 'Cambodge ': 'KH', 'Cameroun ': 'CM', 'Canada ': 'CA', 'Chili ': 'CL', 'Chine ': 'CN', 'Christmas, île ': 'CX', 'Chypre ': 'CY', 'Cocos / Keeling(Îles) ': 'CC', 'Colombie ': 'CO', 'Comores ': 'KM', 'Congo ': 'CG', 'Congo, République démocratique du ': 'CD', 'Cook, Iles ': 'CK', 'Corée, République de ': 'KR', 'Corée, République populaire démocratique de ': 'KP', 'Costa Rica ': 'CR', "Côte d'Ivoire ": 'CI', 'Croatie ': 'HR', 'Cuba ': 'CU', 'Curaçao ': 'CW', 'Danemark ': 'DK', 'Djibouti ': 'DJ', 'Dominicaine, République ': 'DO', 'Dominique ': 'DM', 'Egypte ': 'EG', 'El Salvador ': 'SV', 'Emirats arabes unis ': 'AE', 'Equateur ': 'EC', 'Erythrée ': 'ER', 'Espagne ': 'ES', 'Estonie ': 'EE', "Etats - Unis d'Amérique ": 'US', 'Ethiopie ': 'ET', 'Falkland / Malouines(Îles) ': 'FK', 'Féroé, îles ': 'FO', 'Fidji ': 'FJ', 'Finlande ': 'FI', 'France ': 'FR', 'Gabon ': 'GA', 'Gambie ': 'GM', 'Géorgie ': 'GE', 'Géorgie du sud et les îles Sandwich du sud ': 'GS', 'Ghana ': 'GH', 'Gibraltar ': 'GI', 'Grèce ': 'GR', 'Grenade ': 'GD', 'Groenland ': 'GL', 'Guadeloupe ': 'GP', 'Guam ': 'GU', 'Guatemala ': 'GT', 'Guernesey ': 'GG', 'Guinée ': 'GN', 'Guinée - Bissau ': 'GW', 'Guinée équatoriale ': 'GQ', 'Guyana ': 'GY', 'Guyane française ': 'GF', 'Haïti ': 'HT', 'Honduras ': 'HN', 'Hong Kong ': 'HK', 'Hongrie ': 'HU', 'Île de Man ': 'IM', 'Îles vierges britanniques ': 'VG', 'Îles vierges des Etats - Unis ': 'VI', 'Inde ': 'IN', "Indien (Territoire britannique de l'océan) ": 'IO', 'Indonésie ': 'ID', "Iran, République islamique d' ": 'IR', 'Iraq ': 'IQ', 'Irlande ': 'IE', 'Islande ': 'IS', 'Israël ': 'IL', 'Italie ': 'IT', 'Jamaïque ': 'JM', 'Japon ': 'JP', 'Jersey ': 'JE', 'Jordanie ': 'JO', 'Kazakhstan ': 'KZ', 'Kenya ': 'KE', 'Kirghizistan ': 'KG', 'Kiribati ': 'KI', 'Koweït ': 'KW', 'Lao, République démocratique populaire ': 'LA', 'Lesotho ': 'LS', 'Lettonie ': 'LV', 'Liban ': 'LB', 'Libéria ': 'LR', 'Libye ': 'LY', 'Liechtenstein ': 'LI', 'Lituanie ': 'LT', 'Luxembourg ': 'LU', 'Macao ': 'MO', "Macédoine, l'ex - République yougoslave de ": 'MK', 'Madagascar ': 'MG', 'Malaisie ': 'MY', 'Malawi ': 'MW', 'Maldives ': 'MV', 'Mali ': 'ML', 'Malte ': 'MT', 'Mariannes du nord, Iles ': 'MP', 'Maroc ': 'MA', 'Marshall, Iles ': 'MH', 'Martinique ': 'MQ', 'Maurice ': 'MU', 'Mauritanie ': 'MR', 'Mayotte ': 'YT', 'Mexique ': 'MX', 'Micronésie, Etats Fédérés de ': 'FM', 'Moldova, République de ': 'MD', 'Monaco ': 'MC', 'Mongolie ': 'MN', 'Monténégro ': 'ME', 'Montserrat ': 'MS', 'Mozambique ': 'MZ', 'Myanmar ': 'MM', 'Namibie ': 'NA', 'Nauru ': 'NR', 'Népal ': 'NP', 'Nicaragua ': 'NI', 'Niger ': 'NE', 'Nigéria ': 'NG', 'Niue ': 'NU', 'Norfolk, Ile ': 'NF', 'Norvège ': 'NO', 'Nouvelle - Calédonie ': 'NC', 'Nouvelle - Zélande ': 'NZ', 'Oman ': 'OM', 'Ouganda ': 'UG', 'Ouzbékistan ': 'UZ', 'Pakistan ': 'PK', 'Palaos ': 'PW', 'Palestine, Etat de ': 'PS', 'Panama ': 'PA', 'Papouasie - Nouvelle - Guinée ': 'PG', 'Paraguay ': 'PY', 'Pays - Bas ': 'NL', 'Pérou ': 'PE', 'Philippines ': 'PH', 'Pitcairn ': 'PN', 'Pologne ': 'PL', 'Polynésie française ': 'PF', 'Porto Rico ': 'PR', 'Portugal': 'PT', 'Qatar ': 'QA', 'République arabe syrienne ': 'SY', 'République centrafricaine ': 'CF', 'Réunion ': 'RE', 'Roumanie ': 'RO', "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord ": 'GB', 'Russie, Fédération de ': 'RU', 'Rwanda ': 'RW', 'Sahara occidental ': 'EH', 'Saint-Barthélemy ': 'BL', 'Saint-Kitts-et-Nevis ': 'KN', 'Saint-Marin ': 'SM', 'Saint-Martin (partie française) ': 'MF', 'Saint-Pierre-et-Miquelon ': 'PM', 'Saint-Siège ': 'VA', 'Saint-Vincent-et-les-Grenadines ': 'VC', 'Sainte-Hélène, Ascension et Tristan da Cunha ': 'SH', 'Sainte-Lucie ': 'LC', 'Salomon, Iles ': 'SB', 'Samoa ': 'WS', 'Samoa américaines ': 'AS', 'Sao Tomé-et-Principe ': 'ST', 'Sénégal ': 'SN', 'Serbie ': 'RS', 'Seychelles ': 'SC', 'Sierra Leone ': 'SL', 'Singapour ': 'SG', 'Slovaquie ': 'SK', 'Slovénie ': 'SI', 'Somalie ': 'SO', 'Soudan ': 'SD', 'Soudan du Sud ': 'SS', 'Sri Lanka ': 'LK', 'Suède ': 'SE', 'Suisse ': 'CH', 'Suriname ': 'SR', 'Svalbard et île Jan Mayen ': 'SJ', 'Swaziland ': 'SZ', 'Tadjikistan ': 'TJ', 'Taïwan, Province de Chine ': 'TW', 'Tanzanie, République unie de ': 'TZ', 'Tchad ': 'TD', 'Tchèque, République ': 'CZ', 'Terres australes françaises ': 'TF', 'Thaïlande ': 'TH', 'Timor-Leste ': 'TL', 'Togo ': 'TG', 'Tokelau ': 'TK', 'Tonga ': 'TO', 'Trinité-et-Tobago ': 'TT', 'Tunisie ': 'TN', 'Turkménistan ': 'TM', 'Turks-et-Caïcos (Îles) ': 'TC', 'Turquie ': 'TR', 'Tuvalu ': 'TV', 'Ukraine ': 'UA', 'Uruguay ': 'UY', 'Vanuatu ': 'VU', 'Venezuela (République bolivarienne du) ': 'VE', 'Viet Nam ': 'VN', 'Wallis et Futuna ': 'WF', 'Yémen ': 'YE', 'Zambie ': 'ZM', 'Zimbabwe ': 'ZW'
+        'Afghanistan ': 'AF', 'Afrique du Sud ': 'ZA', 'Åland, Îles ': 'AX', 'Albanie ': 'AL', 'Algérie ': 'DZ', 'Allemagne ': 'DE', 'Andorre ': 'AD', 'Angola ': 'AO', 'Anguilla ': 'AI', 'Antarctique ': 'AQ', 'Antigua et Barbuda ': 'AG', 'Arabie Saoudite ': 'SA', 'Argentine ': 'AR', 'Arménie ': 'AM', 'Aruba ': 'AW', 'Australie ': 'AU', 'Autriche ': 'AT', 'Azerbaïdjan ': 'AZ', 'Bahamas ': 'BS', 'Bahrein ': 'BH', 'Bangladesh ': 'BD', 'Barbade ': 'BB', 'Bélarus ': 'BY', 'Belgique ': 'BE', 'Bélize ': 'BZ', 'Bénin ': 'BJ', 'Bermudes ': 'BM', 'Bhoutan ': 'BT', 'Bolivie(État plurinational de) ': 'BO', 'Bonaire, Saint- Eustache et Saba ': 'BQ', 'Bosnie - Herzégovine ': 'BA', 'Botswana ': 'BW', 'Brésil ': 'BR', 'Brunéi Darussalam ': 'BN', 'Bulgarie ': 'BG', 'Burkina Faso ': 'BF', 'Burundi ': 'BI', 'Cabo Verde ': 'CV', 'Caïmans, Iles ': 'KY', 'Cambodge ': 'KH', 'Cameroun ': 'CM', 'Canada ': 'CA', 'Chili ': 'CL', 'Chine ': 'CN', 'Christmas, île ': 'CX', 'Chypre ': 'CY', 'Cocos / Keeling(Îles) ': 'CC', 'Colombie ': 'CO', 'Comores ': 'KM', 'Congo ': 'CG', 'Congo, République démocratique du ': 'CD', 'Cook, Iles ': 'CK', 'Corée, République de ': 'KR', 'Corée, République populaire démocratique de ': 'KP', 'Costa Rica ': 'CR', "Côte d'Ivoire ": 'CI', 'Croatie ': 'HR', 'Cuba ': 'CU', 'Curaçao ': 'CW', 'Danemark ': 'DK', 'Djibouti ': 'DJ', 'Dominicaine, République ': 'DO', 'Dominique ': 'DM', 'Egypte ': 'EG', 'El Salvador ': 'SV', 'Emirats arabes unis ': 'AE', 'Equateur ': 'EC', 'Erythrée ': 'ER', 'Espagne ': 'ES', 'Estonie ': 'EE', "Etats - Unis d'Amérique ": 'US', 'Ethiopie ': 'ET', 'Falkland / Malouines(Îles) ': 'FK', 'Féroé, îles ': 'FO', 'Fidji ': 'FJ', 'Finlande ': 'FI', 'France ': 'FR', 'Gabon ': 'GA', 'Gambie ': 'GM', 'Géorgie ': 'GE', 'Géorgie du sud et les îles Sandwich du sud ': 'GS', 'Ghana ': 'GH', 'Gibraltar ': 'GI', 'Grèce ': 'GR', 'Grenade ': 'GD', 'Groenland ': 'GL', 'Guadeloupe ': 'GP', 'Guam ': 'GU', 'Guatemala ': 'GT', 'Guernesey ': 'GG', 'Guinée ': 'GN', 'Guinée - Bissau ': 'GW', 'Guinée équatoriale ': 'GQ', 'Guyana ': 'GY', 'Guyane française ': 'GF', 'Haïti ': 'HT', 'Honduras ': 'HN', 'Hong Kong ': 'HK', 'Hongrie ': 'HU', 'Île de Man ': 'IM', 'Îles vierges britanniques ': 'VG', 'Îles vierges des Etats - Unis ': 'VI', 'Inde ': 'IN', "Indien (Territoire britannique de l'océan) ": 'IO', 'Indonésie ': 'ID', "Iran, République islamique d' ": 'IR', 'Iraq ': 'IQ', 'Irlande ': 'IE', 'Islande ': 'IS', 'Israël ': 'IL', 'Italie ': 'IT', 'Jamaïque ': 'JM', 'Japon ': 'JP', 'Jersey ': 'JE', 'Jordanie ': 'JO', 'Kazakhstan ': 'KZ', 'Kenya ': 'KE', 'Kirghizistan ': 'KG', 'Kiribati ': 'KI', 'Koweït ': 'KW', 'Lao, République démocratique populaire ': 'LA', 'Lesotho ': 'LS', 'Lettonie ': 'LV', 'Liban ': 'LB', 'Libéria ': 'LR', 'Libye ': 'LY', 'Liechtenstein ': 'LI', 'Lituanie ': 'LT', 'Luxembourg ': 'LU', 'Macao ': 'MO', "Macédoine, l'ex - République yougoslave de ": 'MK', 'Madagascar ': 'MG', 'Malaisie ': 'MY', 'Malawi ': 'MW', 'Maldives ': 'MV', 'Mali ': 'ML', 'Malte ': 'MT', 'Mariannes du nord, Iles ': 'MP', 'Maroc ': 'MA', 'Marshall, Iles ': 'MH', 'Martinique ': 'MQ', 'Maurice ': 'MU', 'Mauritanie ': 'MR', 'Mayotte ': 'YT', 'Mexique ': 'MX', 'Micronésie, Etats Fédérés de ': 'FM', 'Moldova, République de ': 'MD', 'Monaco ': 'MC', 'Mongolie ': 'MN', 'Monténégro ': 'ME', 'Montserrat ': 'MS', 'Mozambique ': 'MZ', 'Myanmar ': 'MM', 'Namibie ': 'NA', 'Nauru ': 'NR', 'Népal ': 'NP', 'Nicaragua ': 'NI', 'Niger ': 'NE', 'Nigéria ': 'NG', 'Niue ': 'NU', 'Norfolk, Ile ': 'NF', 'Norvège ': 'NO', 'Nouvelle - Calédonie ': 'NC', 'Nouvelle - Zélande ': 'NZ', 'Oman ': 'OM', 'Ouganda ': 'UG', 'Ouzbékistan ': 'UZ', 'Pakistan ': 'PK', 'Palaos ': 'PW', 'Palestine, Etat de ': 'PS', 'Panama ': 'PA', 'Papouasie - Nouvelle - Guinée ': 'PG', 'Paraguay ': 'PY', 'Pays - Bas ': 'NL', 'Pérou ': 'PE', 'Philippines ': 'PH', 'Pitcairn ': 'PN', 'Pologne ': 'PL', 'Polynésie française ': 'PF', 'Porto Rico ': 'PR', 'Portugal': 'PT', 'Qatar ': 'QA', 'République arabe syrienne ': 'SY', 'République centrafricaine ': 'CF', 'Réunion ': 'RE', 'Roumanie ': 'RO', "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord ": 'GB', 'Russie, Fédération de ': 'RU', 'Rwanda ': 'RW', 'Sahara occidental ': 'EH', 'Saint-Barthélemy ': 'BL', 'Saint-Kitts-et-Nevis ': 'KN', 'Saint-Marin ': 'SM', 'Saint-Martin (partie française) ': 'MF', 'Saint-Pierre-et-Miquelon ': 'PM', 'Saint-Siège ': 'VA', 'Saint-Vincent-et-les-Grenadines ': 'VC', 'Sainte-Hélène, Ascension et Tristan da Cunha ': 'SH', 'Sainte-Lucie ': 'LC', 'Salomon, Iles ': 'SB', 'Samoa ': 'WS', 'Samoa américaines ': 'AS', 'Sao Tomé-et-Principe ': 'ST', 'Sénégal ': 'SN', 'Serbie ': 'RS', 'Seychelles ': 'SC', 'Sierra Leone ': 'SL', 'Singapour ': 'SG', 'Slovaquie ': 'SK', 'Slovénie ': 'SI', 'Somalie ': 'SO', 'Soudan ': 'SD', 'Soudan du Sud ': 'SS', 'Sri Lanka ': 'LK', 'Suède ': 'SE', 'Suisse ': 'CH', 'Suriname ': 'SR', 'Svalbard et île Jan Mayen ': 'SJ', 'Swaziland ': 'SZ', 'Tadjikistan ': 'TJ', 'Taïwan, Province de Chine ': 'TW', 'Tanzanie, République unie de ': 'TZ', 'Tchad ': 'TD', 'Tchèque, République ': 'CZ', 'Terres australes françaises ': 'TF', 'Thaïlande ': 'TH', 'Timor-Leste ': 'TL', 'Togo ': 'TG', 'Tokelau ': 'TK', 'Tonga ': 'TO', 'Trinité-et-Tobago ': 'TT', 'Tunisie ': 'TN', 'Turkménistan ': 'TM', 'Turks-et-Caïcos (Îles) ': 'TC', 'Turquie ': 'TR', 'Tuvalu ': 'TV', 'Ukraine ': 'UA', 'Uruguay ': 'UY', 'Vanuatu ': 'VU', 'Venezuela (République bolivarienne du) ': 'VE', 'Viet Nam ': 'VN', 'Wallis et Futuna ': 'WF', 'Yémen ': 'YE', 'Zambie ': 'ZM', 'Zimbabwe ': 'ZW'
     }
 
     liste = document.getElementById("pays")
@@ -621,6 +685,8 @@ function game() {
     index = Math.floor(p * (Object.keys(countries).length - 1))
 
     CHOSENPAYISO = countries[Object.keys(countries)[index]].toLowerCase()
+
+
     CHOSENPAY = Object.keys(countries)[index].trim()
 
 
@@ -631,19 +697,19 @@ function game() {
         randomCouleurs = []
         for (i = 0; i < 6; i++) {
             p = Math.random()
-    
+     
             index = Math.floor(p * (colors.length - 1))
             col = colors[index]
             randomCouleurs.push(col)
         }
-    
+     
         document.getElementById("F").style["color"] = randomCouleurs[0]
         document.getElementById("L").style["color"] = randomCouleurs[1]
         document.getElementById("A").style["color"] = randomCouleurs[2]
         document.getElementById("G").style["color"] = randomCouleurs[3]
         document.getElementById("L2").style["color"] = randomCouleurs[4]
         document.getElementById("E").style["color"] = randomCouleurs[5]
-    
+     
     */
     p = Math.random()
     index = Math.floor(p * (colors.length - 1))

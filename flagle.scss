@@ -4,6 +4,7 @@
 }
 
 #divMain {
+    margin-top: 0%;
     width: 600px;
     display:flex;
     flex-wrap: wrap;
@@ -29,22 +30,27 @@ input:hover{
     color: black;
 }
 
+input:focus{
+    background-color: white;
+    color: black;
+    border: white solid 1px;
+}
+
 #divMain2 {
-    position: absolute;
-    left: 20%;
-    width: 60%;
+    
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     
 }
 
 .color {
     width: 50px; 
-    height: 20px;
-    margin: auto;
+    height: 60%;
+    border-radius: 50%;
     border-bottom: solid 1px white;
     transition: .5s;
+    border: black solid 1px;
 }
 
 #myCanvas {
@@ -61,10 +67,85 @@ canvas {
     width: 50px; 
     height: 40px;
     margin: auto;
+    margin-left: 10px;
     border: solid 1px white;
     margin-bottom: 10px;
-    transition: .5s;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 
+.colore.almost{
+    animation:  bien 2s 3s ease-in-out;
+}
+
+.colore.good{
+    animation:  bien 2s 1s ease-in-out;
+}
+
+@keyframes bien {
+    0%{
+        transform: scale(1);
+    }    
+
+    20%{
+        transform: scale(2);
+    }
+
+    40%{
+        transform: scale(1);
+    }    
+
+    60%{
+        transform: scale(2);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}
+
+
+
+.colore.wrong{
+    animation: byebye .5s ease-in forwards;
+    
+    -webkit-animation: byebye .5s ease-in forwards;
+}
+
+
+@-webkit-keyframes byebye {
+    0% {
+        transform: translateY(0);
+        
+    }    
+
+    25% {
+        transform: translateY(-20%);
+        
+    }
+
+    100% {
+        transform: translateY(300%);
+        opacity: 0;
+    }
+}
+
+@keyframes byebye {
+    0% {
+        transform: translateY(0);
+    }    
+
+    25% {
+        transform: translateY(-20%);
+    }
+
+    100% {
+        transform: translateY(300%);
+        opacity: 0;
+    }
 }
 
 canvas {
@@ -82,17 +163,16 @@ canvas {
     margin: auto;
     margin-bottom: 10px;
     margin-top: 10px;
+    height: 5vh;
 }
 #chosenColor {
     height: 20px;
     background-color: rgb(200, 200, 200);
     border: solid 2px;
-    position: absolute;
-    top: 95%;
-    left: 30%;
-    display: flex;
-    justify-content: center;    
+    height: 20px;
     margin: auto;
+    transition: width height;
+    transition-duration: .5s;
 }
 #subDiv {
     display: flex;
@@ -116,6 +196,22 @@ h2 {
     color: white;
     font-size: 1em;
 }
+#stats {
+    color: white;
+    text-align: center;
+}
+
+#stat {
+    border-radius: 5px;
+    position: absolute;
+    font-size: 0.9em;
+    top: 1em;
+    width: 50px;
+    left: 95%;
+    
+    color: white;
+    background-color: black;
+}
 
 #home {
     position: absolute;
@@ -125,19 +221,23 @@ h2 {
     width: 50px;
     border-radius: 5px;
     font-size: 0.9em;
-    top: 2px;
+    top: 1em;
 }
 
 body {
     font-family: 'Courier New', Courier, monospace;
     margin: auto;
     background-color:  rgb( 1, 33, 105);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #guessCountry {
     margin-top: 10px;
     margin:  0 auto;
     width: 50%;
+    height: 50%;
     text-align: center;
     display: none;
 }
@@ -147,7 +247,9 @@ li {
 }
 
 #search {
+    font-size: large;
     width: 50%;
+    height: 100%;
 }
 
 
@@ -240,12 +342,11 @@ ul {
 
 #F, #L, #A, #G, #L2, #E {
     color: white;
-    font-size: 1em;
+    font-size: 1.5em;
 }
   #page-header {
       overflow: hidden;
       
-      margin-top: -26px;
       width: 100%;
       background-color: #090f39;
   }
@@ -270,7 +371,7 @@ ul {
      border-radius: 5px;
      
      font-size: 0.9em;
-     top: 2px;
+     top: 1em;
      width: 50px;
      left: 5%;
      
@@ -291,11 +392,50 @@ ul {
      font-weight: bold;
  }
 
+ #close2 {
+     
+    height: 5%;
+    justify-content: flex-end;
+    display: flex;
+    align-self: flex-end;
+    color: white;
+    text-align: center;
+    background-color: black;
+    border: rgb(50,50,50);
+    font-weight: bold;
+}
+
+#clipboard {
+    display: none;
+}
+
+#clip {
+    margin: auto;
+    margin-top: 5px;
+    width: 10vw;
+    height: 5vh;
+    border: green solid 3px;
+    
+}
+
+#foot{
+    
+    display: flex;
+    width: 100%;
+
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    color: white;
+    background-color: #090f39;
+}
+
  .regles {
      position: absolute;
      top: 1%;
-     left: 20%;
-     width: 700px;
+     left: 33%;
+     width: 33vw;
      
      background-color: rgb(100,100,100);
      display: flex;

@@ -10,6 +10,46 @@ function game() {
         console.log(1);
     }
     usedColor = {}
+
+    function copyToClipBoard() {
+        day = new Date();
+        day = day.toJSON().slice(0, 10);
+        guesses = JSON.parse(localStorage.guesses)[day].totalTries;
+        console.log(guesses)
+        console.log(trueColor.length)
+        text = ["Flagle, jour: " + jours.length + "\n"];
+
+        for (guess of guesses) {
+            g = "";
+            for (i = 0; i < guess[0]; i++) {
+                g += "🟩";
+            }
+            for (i = 0; i < guess[1]; i++) {
+                g += "🟨";
+            }
+
+            for (i = 0; i < trueColor.length - (guess[1] + guess[0]); i++) {
+                g += "⬜";
+            }
+
+            text.push(g);
+        }
+        if (JSON.parse(localStorage.guesses)[day].hasOwnProperty("star")) {
+            if (JSON.parse(localStorage.guesses)[day].star == 1) {
+                text[text.length - 1] += "🔷"
+            }
+        }
+
+        console.log(text)
+
+        div = document.querySelector("textarea");
+        div.innerHTML = text.join('\n');
+        div.innerHTML += '\n\nflagle.dcpepper.fr';
+        div.select();
+        navigator.clipboard.writeText(div.innerHTML);
+    }
+
+
     function spectreCol(trueColors) {
 
         classColor = document.getElementsByClassName("color")
@@ -72,6 +112,7 @@ function game() {
         boutonColor = document.getElementById("chosenColor")
         couleursplit = chosenColor.split(',')
         boutonColor.style["background-color"] = "rgb(" + couleursplit[0] + "," + couleursplit[1] + "," + couleursplit[2] + ")"
+        boutonColor.style["width"] = "50%";
     }
 
     xglobal = 0
@@ -146,6 +187,7 @@ function game() {
 
             chosenColor = ""
             boutonColor.style["background-color"] = "rgb(200,200,200)"
+            boutonColor.style["width"] = "10%"
         }
     }
 
@@ -230,8 +272,13 @@ function game() {
                 good_colors = dayGuesses["good_colors"];
                 almost_colors = dayGuesses["almost_colors"];
                 wrong_colors = dayGuesses["wrong_colors"];
-                datas = dayGuesses["data"];
+                if (dayGuesses.hasOwnProperty('data')) {
+                    datas = dayGuesses["data"];
+                } else {
+                    datas = []
+                }
                 tries = dayGuesses["totalTries"];
+                star = dayGuesses["star"];
 
                 for (var k = 0; k < tries.length; k++) {
                     totalTries = tries[k];
@@ -253,6 +300,7 @@ function game() {
                                 divCol.style["border"] = "solid 1px";
                                 divCol.style["background-color"] = "#67e56d";
                                 document.getElementById("divTry" + k).appendChild(divCol)
+
                             }
                         }
                         else {
@@ -263,6 +311,7 @@ function game() {
                                 divCol.classList.add("blockCol");
                                 divCol.style["border"] = "solid 1px;";
                                 divCol.style["background-color"] = "yellow";
+
                                 document.getElementById("divTry" + k).appendChild(divCol)
                             }
                         }
@@ -281,22 +330,100 @@ function game() {
 
                 final = tries[tries.length - 1][0]
 
-                if (final == trueColor.length) {
-                    document.getElementById("search").value = "";
-                    document.getElementById('search').focus();
-                    h2 = document.querySelector("h2")
-                    h2.innerHTML = "Bravo ! Rendez-vous demain pour le prochain défi 🚀\nPouvez vous deviner à qui appartient ce drapeau?"
-                    document.getElementById("DivMain").style["display"] = "none"
-                    document.getElementById("DivMain2").style["display"] = "none"
-                    document.getElementById("chosenColor").style["display"] = "none"
-                    document.getElementById("button").style["display"] = "none"
-                    document.getElementById("guessCountry").style["display"] = "block"
+                if (final == trueColor.length || tries.length == 6) {
 
-                    btn = document.getElementById("button2")
-                    btn.addEventListener('click', validerCountry);
+                    if (star == "1") {
+                        h2 = document.querySelector("h2");
+                        h2.innerHTML = "Impressionnant ! En effet, c'est bien le drapeau de " + CHOSENPAY + ". Rendez-vous demain pour le prochain défi !";
 
-                    document.getElementById("myCanvas").style["display"] = "none"
-                    document.getElementById("reponse").style["display"] = "flex"
+                        star = document.createElement("div");
+                        star.id = "star-five";
+
+
+
+
+                        document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].appendChild(star);
+                        document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
+
+                        clip = document.createElement("input");
+                        clip.value = "PARTAGER";
+                        clip.type = "button";
+                        clip.id = "clip";
+                        document.getElementById("resultat").appendChild(clip);
+                        clip.addEventListener('click', copyToClipBoard);
+
+
+                        document.getElementById("DivMain").style["display"] = "none";
+                        document.getElementById("DivMain2").style["display"] = "none";
+                        document.getElementById("chosenColor").style["display"] = "none";
+                        document.getElementById("button").style["display"] = "none";
+                        document.getElementById("guessCountry").style["display"] = "none";
+
+
+                        document.getElementById("myCanvas").style["display"] = "none";
+                        document.getElementById("reponse").style["display"] = "flex";
+                        document.getElementById("resultat").style["display"] = "block";
+
+                    } else if (star == "0") {
+
+                        clip = document.createElement("input");
+                        clip.value = "PARTAGER";
+                        clip.type = "button";
+                        clip.id = "clip";
+                        document.getElementById("resultat").appendChild(clip);
+                        clip.addEventListener('click', copyToClipBoard);
+                        document.getElementById("DivMain").style["display"] = "none";
+                        document.getElementById("DivMain2").style["display"] = "none";
+                        document.getElementById("chosenColor").style["display"] = "none";
+                        document.getElementById("button").style["display"] = "none";
+                        document.getElementById("guessCountry").style["display"] = "none";
+
+                        document.getElementById("myCanvas").style["display"] = "none";
+                        document.getElementById("reponse").style["display"] = "flex";
+                        document.getElementById("resultat").style["display"] = "block";
+                        h2 = document.querySelector("h2");
+                        h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY + ". Rendez-vous demain pour le prochain défi !";
+                    }
+                    else if (tries.length == 6) {
+                        document.getElementById("DivMain").style["display"] = "none";
+                        document.getElementById("DivMain2").style["display"] = "none";
+                        document.getElementById("chosenColor").style["display"] = "none";
+                        document.getElementById("button").style["display"] = "none";
+                        document.getElementById("guessCountry").style["display"] = "none";
+
+
+                        clip = document.createElement("input");
+                        clip.value = "PARTAGER";
+                        clip.type = "button";
+                        clip.id = "clip";
+                        document.getElementById("resultat").appendChild(clip);
+                        clip.addEventListener('click', copyToClipBoard);
+
+                        document.getElementById("myCanvas").style["display"] = "none";
+                        document.getElementById("reponse").style["display"] = "flex";
+                        document.getElementById("resultat").style["display"] = "block";
+                        h2 = document.querySelector("h2");
+                        h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY + ". Rendez-vous demain pour le prochain défi !";
+                    }
+
+                    else {
+
+                        document.getElementById("search").value = "";
+                        document.getElementById('search').focus();
+                        h2 = document.querySelector("h2");
+                        h2.innerHTML = "Bravo !  🚀\nPouvez vous deviner à qui appartient ce drapeau?";
+                        document.getElementById("DivMain").style["display"] = "none";
+                        document.getElementById("DivMain2").style["display"] = "none";
+                        document.getElementById("chosenColor").style["display"] = "none";
+                        document.getElementById("button").style["display"] = "none";
+                        document.getElementById("guessCountry").style["display"] = "block";
+
+                        btn = document.getElementById("button2");
+                        btn.addEventListener('click', validerCountry);
+
+                        document.getElementById("myCanvas").style["display"] = "none";
+                        document.getElementById("reponse").style["display"] = "flex";
+                    }
                 } else {
                     minis = document.getElementsByClassName("mini");
 
@@ -364,9 +491,15 @@ function game() {
                                 return y + parseInt(x).toString(16)
                             }
                         }, "#") + "."
-                        console.log(col3)
+                        bout = document.getElementById(col3.toUpperCase());
                         document.getElementById(col3.toUpperCase()).style["background-color"] = "#67e56d";
-                        console.log(document.getElementById(col3.toUpperCase()).style["background-color"])
+                        if (bout.classList.length > 1) {
+                            if (bout.classList[1] == "almost") {
+                                bout.classList.remove("almost");
+                            }
+                        }
+                        bout.classList.add("good")
+
                     }
                     canvasctx.putImageData(dataCanvas, 0, 0);
 
@@ -380,6 +513,8 @@ function game() {
                             }
                         }, "#") + "."
                         document.getElementById(col3.toUpperCase()).style["background-color"] = "yellow";
+                        bout = document.getElementById(col3.toUpperCase());
+                        bout.classList.add("almost")
                     }
 
                     for (col of wrong_colors) {
@@ -392,6 +527,8 @@ function game() {
                             }
                         }, "#") + "."
                         document.getElementById(col3.toUpperCase()).style["background-color"] = "black";
+                        bout = document.getElementById(col3.toUpperCase());
+                        bout.classList.add("wrong")
                     }
                 }
             }
@@ -435,13 +572,78 @@ function game() {
             couleurs[str] = couleurs[str] ? couleurs[str] + 1 : 1;
         }
 
+        for (colEntry of Object.entries(couleurs)) {
+            if (colEntry[1] * 100 / (height * width) < 0.5) {
+                delete couleurs[colEntry[0]];
+            }
+        }
         for (var i = 0; i < Object.entries(couleurs).length; i++) {
 
-            if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 1) {
-
-                trueColor.push(Object.entries(couleurs)[i][0]);
+            if (CHOSENPAYISO.toLowerCase() == "ar") {
+                if (Object.entries(couleurs)[i][1] > 1450) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            } else if (CHOSENPAYISO.toLowerCase() == "aw") {
+                if (Object.entries(couleurs)[i][1] > 2680) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
             }
-
+            else if (CHOSENPAYISO.toLowerCase() == "br") {
+                if (Object.entries(couleurs)[i][1] > 2380) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "ky") {
+                if (Object.entries(couleurs)[i][1] > 1500) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "fj") {
+                if (Object.entries(couleurs)[i][1] > 1450) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "gt") {
+                if (Object.entries(couleurs)[i][1] > 800) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "lr") {
+                if (Object.entries(couleurs)[i][1] > 3000) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "mp") {
+                if (Object.entries(couleurs)[i][1] > 3000) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "sm") {
+                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else if (CHOSENPAYISO.toLowerCase() == "tk") {
+                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
+            else {
+                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 1) {
+                    console.log({ "col": Object.entries(couleurs)[i] })
+                    trueColor.push(Object.entries(couleurs)[i][0]);
+                }
+            }
         }
 
         spectreCol(trueColor)
@@ -463,32 +665,13 @@ function game() {
         classColor = document.getElementsByClassName("color")
         classColor2 = document.getElementsByClassName("colore")
         for (divElt of classColor) {
-            divElt.style["width"] = canvas.width / classColor.length
-            /*
-            divElt.addEventListener("mouseover", function (event) {
-                this.style["width"] = canvas.width * 2 / classColor.length
-                id = this.id;
-                if (Object.keys(changeID).includes(id.toLowerCase())) {
-                    id = changeID[id.toLowerCase()].toUpperCase()
-                }
-                id = id + "."
-                divElt2 = document.getElementById(id)
-                divElt2.style["width"] = canvas.width * 2 / classColor.length
-            });
-            divElt.addEventListener("mouseleave", function (event) {
-                this.style["width"] = canvas.width / classColor.length
-                id = this.id;
-                if (Object.keys(changeID).includes(id.toLowerCase())) {
-                    id = changeID[id.toLowerCase()].toUpperCase()
-                }
-                id = id + "."
-                divElt2 = document.getElementById(id)
-                divElt2.style["width"] = canvas.width / classColor.length
-            });
-            */
+            divElt.style["width"] = canvas.width * 2 / classColor.length
+            divElt.style["height"] = canvas.width * 2 / classColor.length
+
         }
         for (divElt of classColor2) {
-            divElt.style["width"] = canvas.width / classColor2.length
+            divElt.style["width"] = canvas.width * 3 / classColor2.length
+            divElt.style["height"] = canvas.width * 3 / classColor2.length
         }
         newPixels = []
         for (elt of pixelsCol) {
@@ -534,6 +717,7 @@ function game() {
     function validerCountry() {
         text = document.getElementById("search").value;
         if (text.toLowerCase() == CHOSENPAY.toLowerCase()) {
+            starBol = 1;
 
 
 
@@ -544,14 +728,48 @@ function game() {
             star.id = "star-five"
 
 
+
+
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].appendChild(star)
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
-        } else {
 
+            clip = document.createElement("input");
+            clip.value = "PARTAGER";
+            clip.type = "button";
+            clip.id = "clip";
+            clip.addEventListener('click', copyToClipBoard);
+            document.getElementById("resultat").appendChild(clip);
+        } else {
+            starBol = 0;
             h2 = document.querySelector("h2")
             h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY
 
+
+            clip = document.createElement("input");
+            clip.value = "PARTAGER";
+            clip.type = "button";
+            clip.id = "clip";
+            clip.addEventListener('click', copyToClipBoard);
+            document.getElementById("resultat").appendChild(clip);
         }
+
+        guesses = JSON.parse(localStorage["guesses"])
+        day = new Date();
+        day = day.toJSON().slice(0, 10);
+        guessDay = guesses[day];
+        guessDay["star"] = starBol;
+        guessDay["win"] = "1";
+
+        if (guessDay.hasOwnProperty("data")) {
+            delete guessDay["data"];
+        }
+
+
+        guesses[day] = guessDay;
+
+        localStorage.setItem("guesses", JSON.stringify(guesses))
+        statistiques();
+
         document.getElementById("button2").removeEventListener('click', validerCountry)
 
         document.getElementById("resultat").style["display"] = "block"
@@ -561,6 +779,59 @@ function game() {
     var wrong_colors = [];
     var almost_colors = [];
     var good_colors = [];
+
+    function statistiques() {
+        if (localStorage.hasOwnProperty("guesses")) {
+
+            guesses = JSON.parse(localStorage["guesses"]);
+            Parties = Object.keys(JSON.parse(localStorage.guesses)).length;
+            etoiles = 0;
+            bons = 0;
+            presques = 0;
+            mauvais = 0;
+            nbrCoups = { "1/6": 0, "2/6": 0, "3/6": 0, "4/6": 0, "5/6": 0, "6/6": 0, "-/6": 0 };
+            for (day of Object.keys(guesses)) {
+                console.log(guesses[day])
+                m = guesses[day]["totalTries"].length;
+                if (guesses[day].hasOwnProperty("win")) {
+                    nbrCoups[String(m) + "/6"]++;
+                } else {
+                    nbrCoups["-/6"]++;
+                }
+                if (guesses[day].hasOwnProperty("star")) {
+                    etoiles += guesses[day]["star"];
+                }
+                bons += guesses[day]["good_colors"].length;
+                presques = guesses[day]["totalTries"].reduce((y, x) => y + x[1], presques);
+                mauvais += guesses[day]["wrong_colors"].length;
+            }
+
+            document.getElementById("Parties").innerHTML = Parties;
+            for (elt of Object.keys(nbrCoups)) {
+                document.getElementById(elt).innerHTML = nbrCoups[elt];
+            }
+            document.getElementById("oui").innerHTML = bons;
+            document.getElementById("presque").innerHTML = presques;
+            document.getElementById("non").innerHTML = mauvais;
+            document.getElementById("top").innerHTML = etoiles;
+
+        } else {
+            document.getElementById("Parties").innerHTML = "0";
+            document.getElementById("1/6").innerHTML = "0";
+            document.getElementById("2/6").innerHTML = "0";
+            document.getElementById("3/6").innerHTML = "0";
+            document.getElementById("4/6").innerHTML = "0";
+            document.getElementById("5/6").innerHTML = "0";
+            document.getElementById("6/6").innerHTML = "0";
+            document.getElementById("-/6").innerHTML = "0";
+            document.getElementById("oui").innerHTML = "0";
+            document.getElementById("presque").innerHTML = "0";
+            document.getElementById("non").innerHTML = "0";
+            document.getElementById("top").innerHTML = "0";
+
+        }
+
+    }
 
     function saveToStorage(dataAux) {
         if (!localStorage.hasOwnProperty("guesses")) {
@@ -591,7 +862,7 @@ function game() {
         localStorage.setItem("guesses", str)
     }
 
-    function saveToStorageData(step, totTries, g_colors, a_colors, w_colors) {
+    function saveToStorageData(step, totTries, g_colors, a_colors, w_colors, bol) {
         if (!localStorage.hasOwnProperty("guesses")) {
             localStorage.setItem("guesses", "{}");
         }
@@ -615,6 +886,14 @@ function game() {
             guessDate["totalTries"] = [];
         }
         guessDate["totalTries"].push(totTries);
+        console.log(bol)
+        console.log(guessDate)
+        console.log(guessDate.hasOwnProperty("data"))
+        if (bol) {
+            if (guessDate.hasOwnProperty("data")) {
+                delete guessDate["data"];
+            }
+        }
 
         guesses[date] = guessDate;
         guessesString = JSON.stringify(guesses);
@@ -668,6 +947,8 @@ function game() {
 
                 bout = document.getElementById(col3)
                 bout.style["background-color"] = "black"
+
+                bout.classList.add("wrong")
             } else if (usedColor[key] == key) {
                 col = usedColor[key]
                 col3 = col.split(',').slice(0, 3).reduce(function (y, x) {
@@ -682,6 +963,14 @@ function game() {
 
                 bout = document.getElementById(col3)
                 bout.style["background-color"] = "#67e56d"
+                bout.classList.add("good")
+                if (bout.classList.length > 1) {
+                    if (bout.classList[1] == "almost") {
+                        bout.classList.remove("almost");
+                    }
+                }
+                bout.classList.add("good")
+
                 if (!good_colors.includes(usedColor[key])) {
                     good_colors.push(usedColor[key])
                 }
@@ -700,6 +989,7 @@ function game() {
 
                 bout = document.getElementById(col3)
                 bout.style["background-color"] = "yellow"
+                bout.classList.add("almost")
                 if (!almost_colors.includes(usedColor[key])) {
                     almost_colors.push(usedColor[key])
                 }
@@ -802,10 +1092,10 @@ function game() {
             }
         }
         console.log(totalTries)
-        saveToStorageData(V, totalTries, good_colors, almost_colors, wrong_colors)
 
 
 
+        bolChangeLocalStorage = false;
         if (good_colors.length == trueColor.length && vic) {
             document.getElementById("search").value = "";
             document.getElementById('search').focus();
@@ -822,6 +1112,7 @@ function game() {
 
             document.getElementById("myCanvas").style["display"] = "none"
             document.getElementById("reponse").style["display"] = "flex"
+            bolChangeLocalStorage = true;
         } else if (V == 5) {
 
             h2 = document.querySelector("h2")
@@ -834,8 +1125,18 @@ function game() {
             document.getElementById("resultat").style["display"] = "block"
 
             document.getElementById("button").removeEventListener('click', valider)
+            clip = document.createElement("input");
+            clip.value = "PARTAGER";
+            clip.type = "button";
+            clip.id = "clip";
+            clip.addEventListener('click', copyToClipBoard);
+            document.getElementById("resultat").appendChild(clip);
+            bolChangeLocalStorage = true;
 
         }
+        console.log(bolChangeLocalStorage)
+
+        saveToStorageData(V, totalTries, good_colors, almost_colors, wrong_colors, bolChangeLocalStorage);
 
     }
 
@@ -853,11 +1154,46 @@ function game() {
     }
 
     var date = new Date()
-    date = date.toJSON().slice(0, 10)
+    //date.setDate(date.getDate() - 1);
+    date = date.toJSON().slice(0, 10);
+    jour = new Date();
+    jourJSON = jour.toJSON().slice(0, 10);
+    depart = "2022-03-24"
+    jours = [];
+    while (jourJSON != depart) {
+        jour.setDate(jour.getDate() - 1);
+        jourJSON = jour.toJSON().slice(0, 10);
+        p = new Math.seedrandom(jourJSON)
+        p = p()
+        index = Math.floor(p * (Object.keys(countries).length - 1))
+        if (!jours.includes(index)) {
+            jours.push(index)
+        }
+        else {
+            j = index;
+            while (jours.includes(j)) {
+                j = (j + 1) % Object.keys(countries).length;
+            }
+            index = j;
+            jours.push(index)
+        }
+    }
+
+
     var p = new Math.seedrandom(date);
     p = p()
     index = Math.floor(p * (Object.keys(countries).length - 1))
-
+    if (!jours.includes(index)) {
+        jours.push(index)
+    }
+    else {
+        j = index;
+        while (jours.includes(j)) {
+            j = (j + 1) % Object.keys(countries).length;
+        }
+        index = j;
+        jours.push(index)
+    }
 
 
     CHOSENPAYISO = countries[Object.keys(countries)[index]].toLowerCase()
@@ -889,11 +1225,21 @@ function game() {
     index = Math.floor(p * (colors.length - 1))
     col = colors[index]
     document.getElementById("L2").style["color"] = col;
+    statistiques();
 }
 
 open = document.getElementById('open')
 modal = document.getElementById('modal')
+modal2 = document.getElementById('modal2')
 close = document.getElementById('close')
+close2 = document.getElementById('close2')
+stat = document.getElementById("stat")
+
+stat.addEventListener('click', () => {
+
+    modal2.style['display'] = "block";
+})
+
 
 open.addEventListener('click', () => {
 
@@ -903,10 +1249,17 @@ open.addEventListener('click', () => {
 close.addEventListener('click', () => {
 
     modal.style['display'] = "none";
+
+})
+
+close2.addEventListener('click', () => {
+
+    modal2.style['display'] = "none";
+
 })
 
 
 
 
 
-game()
+game();

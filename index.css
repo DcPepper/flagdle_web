@@ -10,8 +10,20 @@ body {
     
 }
 
+#foot{
+    display: flex;
+    width: 100%;
+
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    color: white;
+    background-color: #090f39;
+}
+
 #page-header {
-    font-size: 2em;
+    font-size: 3em;
     color: white;
     overflow: hidden;
     min-height: 5%;
