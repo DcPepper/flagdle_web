@@ -320,6 +320,8 @@ function game() {
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
+
+
             else if (CHOSENPAYISO.toLowerCase() == "tk") {
                 if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
                     console.log({ "col": Object.entries(couleurs)[i] })
@@ -354,12 +356,12 @@ function game() {
         classColor = document.getElementsByClassName("color")
         classColor2 = document.getElementsByClassName("colore")
         for (divElt of classColor) {
-            divElt.style["width"] = canvas.width * 2 / classColor.length
-            divElt.style["height"] = canvas.width * 2 / classColor.length
+            divElt.style["width"] = canvas.width / classColor.length
+            divElt.style["height"] = canvas.width / classColor.length
         }
         for (divElt of classColor2) {
-            divElt.style["width"] = canvas.width * 3 / classColor2.length
-            divElt.style["height"] = canvas.width * 3 / classColor2.length
+            divElt.style["width"] = canvas.width * 1.5 / classColor2.length
+            divElt.style["height"] = canvas.width * 1.5 / classColor2.length
         }
         newPixels = []
         for (elt of pixelsCol) {
@@ -687,6 +689,7 @@ function game() {
     CHOSENPAYISO = countries[Object.keys(countries)[index]].toLowerCase()
 
 
+
     CHOSENPAY = Object.keys(countries)[index].trim()
 
 
@@ -715,6 +718,7 @@ function game() {
     index = Math.floor(p * (colors.length - 1))
     col = colors[index]
     document.getElementById("L2").style["color"] = col;
+    console.log(CHOSENPAY)
 }
 
 open = document.getElementById('open')
@@ -752,6 +756,11 @@ if (cookie > 0) {
 } else {
     document.getElementById("serie").innerHTML = ""
 }
+
+
+pix = document.getElementById("open").offsetHeight
+console.log(pix)
+document.getElementById("page-header").style['height'] = String(pix + 6) + "px"
 
 
 game()

@@ -186,6 +186,7 @@ canvas {
 
 
 h1 {
+    margin-top: .2em;
     text-align: center;
     color: white;
 }
@@ -204,7 +205,7 @@ h2 {
     border-radius: 5px;
     position: absolute;
     font-size: 0.9em;
-    top: 1em;
+    top: 0.1em;
     width: 50px;
     left: 95%;
     
@@ -220,7 +221,7 @@ h2 {
     width: 50px;
     border-radius: 5px;
     font-size: 0.9em;
-    top: 1em;
+    top: 0.1em;
 }
 
 body {
@@ -229,7 +230,7 @@ body {
     background-color:  rgb( 1, 33, 105);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 #guessCountry {
@@ -341,7 +342,7 @@ ul {
 
 #F, #L, #A, #G, #L2, #E {
     color: white;
-    font-size: 1.5em;
+    font-size: 1em;
 }
   #page-header {
       overflow: hidden;
@@ -370,7 +371,7 @@ ul {
      border-radius: 5px;
      
      font-size: 0.9em;
-     top: 1em;
+     top: 0.1em;
      width: 50px;
      left: 5%;
      
@@ -417,6 +418,10 @@ ul {
     
 }
 
+#nbrC {
+    margin-top: -10px;
+}
+
 #foot{
     
     display: flex;
@@ -433,8 +438,8 @@ ul {
  .regles {
      position: absolute;
      top: 1%;
-     left: 33%;
-     width: 33vw;
+     left: 25%;
+     width: 50vw;
      
      background-color: rgb(100,100,100);
      display: flex;
@@ -444,7 +449,7 @@ ul {
  }
 
  #rules{
-     font-size: 1em;
+     font-size: .8em;
  }
 
 #serie {
