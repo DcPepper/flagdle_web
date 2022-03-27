@@ -66,10 +66,14 @@ function game() {
     function choseColor(e) {
         chosenColor = e.style["background-color"]
         chosenColor = chosenColor.replace('rgb(', '').replace(')', '').replaceAll(' ', '')
-        boutonColor = document.getElementById("chosenColor")
+        btn = document.getElementsByClassName("colore");
+        for (b of btn) {
+            b.style["border"] = "";
+        }
+        document.getElementById(e.id).parentElement.style["border"] = "red solid 3px"
+
         couleursplit = chosenColor.split(',')
-        boutonColor.style["background-color"] = "rgb(" + couleursplit[0] + "," + couleursplit[1] + "," + couleursplit[2] + ")"
-        boutonColor.style["width"] = "50%";
+
 
     }
 
@@ -114,8 +118,7 @@ function game() {
 
             selectedColor = chosenColor.split(',')
             OriginalColor = pixelsColOriginal[chosenColorPixel]
-            console.log(OriginalColor)
-            console.log(trueColor)
+
             if (trueColor.includes(OriginalColor.slice(0, 3).join())) {
                 usedColor[OriginalColor] = selectedColor.join() + ",255"
 
@@ -144,14 +147,14 @@ function game() {
 
             ctx.putImageData(data, 0, 0);
 
-            chosenColor = ""
-            boutonColor.style["background-color"] = "rgb(200,200,200)"
-            boutonColor.style["width"] = "10%";
+
+
 
         }
     }
 
     function hextoRGB(c) {
+
         c = c.slice(1);
         red = parseInt(c.slice(0, 2), 16);
         green = parseInt(c.slice(2, 4), 16);
@@ -166,32 +169,27 @@ function game() {
 
 
 
-    colors = ["#FFC0CB"
-        , "#FF0000"
-        , "#800000"
-        , "#A52A2A"
-        , "#FA8072"
+    colors = ["#800000"
+
+
         , "#FF4500"
         , "#D2691E"
-        , "#FFA500"
+
         , "#FFD700"
-        , "#FFFF00"
-        , "#808000"
-        , "#9ACD32"
-        , "#7FFF00"
+
+
         , "#008000"
         , "#40E0D0"
-        , "#00FFFF"
+
         , "#008080"
-        , "#0000FF"
+
         , "#000080"
-        , "#8A2BE2"
+
         , "#DDA0DD"
-        , "#FF00FF"
-        , "#800080"
+
         , "#D2B48C"
         , "#808080"
-        , "#2F4F4F"
+
         , "#FFFFFF"
         , "#000000"]
     colorsRGB = []
@@ -216,7 +214,7 @@ function game() {
 
     var ctx = canvas.getContext("2d");
     var image = new Image();
-    boutonColor = document.getElementById("chosenColor")
+
 
     image.crossOrigin = "anonymous";
     couleurs = {}
@@ -246,7 +244,7 @@ function game() {
             pixelsCol.push(pixels.slice(i, i + 4));
         }
 
-        console.log(pixelsCol.length)
+
 
 
         for (var i = 0; i < pixelsCol.length; i++) {
@@ -257,66 +255,112 @@ function game() {
             var str = [r, g, b].join();
             couleurs[str] = couleurs[str] ? couleurs[str] + 1 : 1;
         }
-        console.log(Object.keys(couleurs).length)
-        console.log(couleurs)
 
-        for (colEntry of Object.entries(couleurs)) {
-            if (colEntry[1] * 100 / (height * width) < 0.5) {
-                delete couleurs[colEntry[0]];
+        /*
+                for (colEntry of Object.entries(couleurs)) {
+                    if (colEntry[1] * 100 / (height * width) < 0.5) {
+                        delete couleurs[colEntry[0]];
+                    }
+                }
+        */
+        sortedCol = Object.entries(couleurs)
+        sortedCol = sortedCol.sort((a, b) => b[1] - a[1])
+        console.log(sortedCol)
+        couleurs = {}
+        if (CHOSENPAYISO.toLowerCase() == "as") {
+            for (let key of sortedCol.slice(0, 5)) {
+                couleurs[key[0]] = key[1]
+                trueColor.push(key[0])
+            }
+        } else if (CHOSENPAYISO.toLowerCase() == "ly") {
+            for (let key of sortedCol.slice(0, 4)) {
+                couleurs[key[0]] = key[1]
+                trueColor.push(key[0])
+            }
+        } else if (CHOSENPAYISO.toLowerCase() == "sm") {
+            for (let key of sortedCol.slice(0, 5)) {
+                couleurs[key[0]] = key[1]
+                trueColor.push(key[0])
+            }
+        } else if (CHOSENPAYISO.toLowerCase() == "li") {
+            for (let key of sortedCol.slice(0, 3)) {
+                couleurs[key[0]] = key[1]
+                trueColor.push(key[0])
+            }
+        } else if (CHOSENPAYISO.toLowerCase() == "tm") {
+            for (let key of sortedCol.slice(0, 2)) {
+                couleurs[key[0]] = key[1]
+                trueColor.push(key[0])
+            }
+            trueColor.push("255,255,255")
+        } else if (CHOSENPAYISO.toLowerCase() == "ar") {
+            for (let key of sortedCol.slice(0, 2)) {
+
+                couleurs[key[0]] = key[1]
+                trueColor.push(key[0])
+            }
+            trueColor.push("246,180,14")
+        } else {
+            for (let key of sortedCol) {
+                if (key[1] * 100 / (height * width) > 1) {
+                    couleurs[key[0]] = key[1]
+                    trueColor.push(key[0])
+                }
             }
         }
+        /*
         for (var i = 0; i < Object.entries(couleurs).length; i++) {
 
             if (CHOSENPAYISO.toLowerCase() == "ar") {
                 if (Object.entries(couleurs)[i][1] > 1450) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             } else if (CHOSENPAYISO.toLowerCase() == "aw") {
                 if (Object.entries(couleurs)[i][1] > 2680) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else if (CHOSENPAYISO.toLowerCase() == "br") {
                 if (Object.entries(couleurs)[i][1] > 2380) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else if (CHOSENPAYISO.toLowerCase() == "ky") {
                 if (Object.entries(couleurs)[i][1] > 1500) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else if (CHOSENPAYISO.toLowerCase() == "fj") {
                 if (Object.entries(couleurs)[i][1] > 1450) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else if (CHOSENPAYISO.toLowerCase() == "gt") {
                 if (Object.entries(couleurs)[i][1] > 800) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else if (CHOSENPAYISO.toLowerCase() == "lr") {
                 if (Object.entries(couleurs)[i][1] > 3000) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else if (CHOSENPAYISO.toLowerCase() == "mp") {
                 if (Object.entries(couleurs)[i][1] > 3000) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else if (CHOSENPAYISO.toLowerCase() == "sm") {
                 if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
@@ -324,21 +368,21 @@ function game() {
 
             else if (CHOSENPAYISO.toLowerCase() == "tk") {
                 if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
             else {
                 if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 1) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
+
                     trueColor.push(Object.entries(couleurs)[i][0]);
                 }
             }
 
         }
-
+*/
         spectreCol(trueColor)
-        console.log(new Date() - un)
+
 
         for (var i = 0; i < pixelsCol.length; i++) {
             var col = pixelsCol[i];
@@ -352,17 +396,19 @@ function game() {
                 pixelsCol[i] = [1, 1, 1, 255];
             }
         }
-        boutonColor.style["width"] = canvas.width
+
         classColor = document.getElementsByClassName("color")
         classColor2 = document.getElementsByClassName("colore")
+        /*
         for (divElt of classColor) {
             divElt.style["width"] = canvas.width / classColor.length
             divElt.style["height"] = canvas.width / classColor.length
         }
         for (divElt of classColor2) {
-            divElt.style["width"] = canvas.width * 1.5 / classColor2.length
-            divElt.style["height"] = canvas.width * 1.5 / classColor2.length
+            divElt.style["width"] = canvas.width * 2 / classColor2.length
+            divElt.style["height"] = canvas.width * 2 / classColor2.length
         }
+        */
         newPixels = []
         for (elt of pixelsCol) {
             for (c of elt) {
@@ -377,10 +423,7 @@ function game() {
 
         ctx.putImageData(data, 0, 0);
 
-        console.log(document.getElementById("myCanvas").width)
-        console.log(document.getElementById("myCanvas").height)
 
-        console.log(new Date() - un)
     }
 
 
@@ -394,16 +437,7 @@ function game() {
         text = document.getElementById("search").value;
         if (text.toLowerCase() == CHOSENPAY.toLowerCase()) {
 
-            first = document.cookie.split('&')[1];
-            cookie = document.cookie.split('&')[0];
-            cookie++;
-            if (parseInt(cookie) < 2) {
-                document.getElementById("serie").innerHTML = "Nombre de drapeau d'affilé deviné: " + cookie;
-            }
-            else {
-                document.getElementById("serie").innerHTML = "Nombre de drapeaux d'affilé devinés: " + cookie;
-            }
-            document.cookie = String(cookie) + "&0"
+
             h2 = document.querySelector("h2")
             h2.innerHTML = "Bonne réponse ! (" + CHOSENPAY + ")";
 
@@ -418,7 +452,7 @@ function game() {
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].appendChild(star)
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
         } else {
-            document.cookie = -1;
+
             h2 = document.querySelector("h2")
             h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY
             rejouer = document.createElement('input');
@@ -535,8 +569,7 @@ function game() {
             }
         }
         almost_colors = almost_colors.filter((e) => { return !good_colors.includes(e) })
-        console.log(good_colors)
-        console.log(almost_colors)
+
         totalTries = [good_colors.length, almost_colors.length]
 
         divTry = document.createElement("div");
@@ -620,7 +653,7 @@ function game() {
                 vic = false
             }
         }
-        console.log(trueColor)
+
         for (key of Object.keys(usedColor)) {
             if (!trueColor.includes(key)) {
                 delete usedColor[key]
@@ -634,7 +667,7 @@ function game() {
             h2.innerHTML = "Bravo ! Quel est le nom de ce drapeau?"
             document.getElementById("DivMain").style["display"] = "none"
             document.getElementById("DivMain2").style["display"] = "none"
-            document.getElementById("chosenColor").style["display"] = "none"
+
             document.getElementById("button").style["display"] = "none"
             document.getElementById("guessCountry").style["display"] = "block"
             document.getElementById("guessCountry").style["height"] = "5vh"
@@ -645,14 +678,14 @@ function game() {
             document.getElementById("myCanvas").style["display"] = "none"
             document.getElementById("reponse").style["display"] = "flex"
         } else if (V == 5) {
-            document.cookie = -1;
+
             h2 = document.querySelector("h2")
             h2.innerHTML = "Dommage ! Ce drapeau est: " + CHOSENPAY
             document.getElementById("myCanvas").style["display"] = "none"
             document.getElementById("reponse").style["display"] = "flex"
             document.getElementById("DivMain").style["display"] = "none"
             document.getElementById("DivMain2").style["display"] = "none"
-            document.getElementById("chosenColor").style["display"] = "none"
+
             document.getElementById("resultat").style["display"] = "block"
             document.getElementById("resultat").style["margin-top"] = "5vh"
             rejouer = document.createElement('input');
@@ -687,6 +720,7 @@ function game() {
     index = Math.floor(p * (Object.keys(countries).length - 1))
 
     CHOSENPAYISO = countries[Object.keys(countries)[index]].toLowerCase()
+    //CHOSENPAYISO = "tm"
 
 
 
@@ -718,7 +752,7 @@ function game() {
     index = Math.floor(p * (colors.length - 1))
     col = colors[index]
     document.getElementById("L2").style["color"] = col;
-    console.log(CHOSENPAY)
+
 }
 
 open = document.getElementById('open')
@@ -735,31 +769,13 @@ close.addEventListener('click', () => {
     modal.style['display'] = "none";
 })
 
-first = document.cookie.split('&')[1];
-cookie = document.cookie.split('&')[0];
-if (first == "0") {
-    document.cookie = String(cookie) + "&1"
-    console.log("Nay")
 
-} else {
-    document.cookie = "0&1"
-}
 
-cookie = document.cookie.split('&')[0];
-if (cookie > 0) {
-    if (parseInt(cookie) < 2) {
-        document.getElementById("serie").innerHTML = "Nombre de drapeau d'affilé deviné: " + cookie;
-    }
-    else {
-        document.getElementById("serie").innerHTML = "Nombre de drapeaux d'affilé devinés: " + cookie;
-    }
-} else {
-    document.getElementById("serie").innerHTML = ""
-}
+
 
 
 pix = document.getElementById("open").offsetHeight
-console.log(pix)
+
 document.getElementById("page-header").style['height'] = String(pix + 6) + "px"
 
 

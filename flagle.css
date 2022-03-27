@@ -10,6 +10,10 @@
     
 }
 
+html {
+    padding-bottom: -100px;
+}
+
 input {
     background-color: #39393c;
     font-weight: bold;
@@ -44,8 +48,8 @@ input:focus{
 }
 
 .color {
-    width: 50px; 
-    height: 60%;
+    width: 45px; 
+    height: 45px;
     border-radius: 50%;
     border-bottom: solid 1px white;
     transition: .5s;
@@ -54,6 +58,24 @@ input:focus{
 
 #myCanvas {
     max-height: 50vh;
+
+}
+
+#clipAlert{
+    display: none;
+    background-color: white;
+    font-weight:bold;
+    border-radius: 2px;
+    
+    
+    
+}
+
+
+
+#clipDiv{
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -63,8 +85,9 @@ canvas {
 }
 
 .colore {
-    width: 50px; 
-    height: 40px;
+    box-sizing: border-box;
+    width: 60px; 
+    height: 60px;
     margin: auto;
     margin-left: 10px;
     border: solid 1px white;
@@ -73,6 +96,7 @@ canvas {
     display: flex;
     justify-content: center;
     align-items: center;
+    
     
 }
 
@@ -191,6 +215,10 @@ h1 {
     color: white;
 }
 
+h3 {
+    font-size: 0.9em;
+}
+
 h2 {
     text-align: center;
     color: white;
@@ -204,7 +232,7 @@ h2 {
 #stat {
     border-radius: 5px;
     position: absolute;
-    font-size: 0.9em;
+    font-size: 0.8em;
     top: 0.1em;
     width: 50px;
     left: 95%;
@@ -237,7 +265,7 @@ body {
     margin-top: 10px;
     margin:  0 auto;
     width: 50%;
-    height: 50%;
+    
     text-align: center;
     display: none;
 }
@@ -249,7 +277,7 @@ li {
 #search {
     font-size: large;
     width: 50%;
-    height: 100%;
+    
 }
 
 
@@ -418,22 +446,9 @@ ul {
     
 }
 
-#nbrC {
-    margin-top: -10px;
-}
 
-#foot{
-    
-    display: flex;
-    width: 100%;
 
-    justify-content: center;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    color: white;
-    background-color: #090f39;
-}
+
 
  .regles {
      position: absolute;

@@ -15,11 +15,10 @@ function game() {
         day = new Date();
         day = day.toJSON().slice(0, 10);
         guesses = JSON.parse(localStorage.guesses)[day].totalTries;
-        console.log(guesses)
-        console.log(trueColor.length)
+
         text = ["Flagle, jour: " + jours.length + "\n"];
 
-        for (guess of guesses) {
+        for (let guess of guesses) {
             g = "";
             for (i = 0; i < guess[0]; i++) {
                 g += "🟩";
@@ -40,13 +39,20 @@ function game() {
             }
         }
 
-        console.log(text)
+
 
         div = document.querySelector("textarea");
         div.innerHTML = text.join('\n');
-        div.innerHTML += '\n\nflagle.dcpepper.fr';
+        div.innerHTML += '\nhttps://dcpepper.fr/flagle';
         div.select();
         navigator.clipboard.writeText(div.innerHTML);
+
+        clipAlert.style["display"] = "block";
+        setTimeout(function () {
+            clipAlert.style.display = "none";
+        }, 3000);
+
+
     }
 
 
@@ -108,11 +114,16 @@ function game() {
 
     function choseColor(e) {
         chosenColor = e.style["background-color"]
+        btn = document.getElementsByClassName("colore");
+        for (b of btn) {
+            b.style["border"] = "";
+        }
+        document.getElementById(e.id).parentElement.style["border"] = "red solid 3px"
         chosenColor = chosenColor.replace('rgb(', '').replace(')', '').replaceAll(' ', '')
-        boutonColor = document.getElementById("chosenColor")
+
         couleursplit = chosenColor.split(',')
-        boutonColor.style["background-color"] = "rgb(" + couleursplit[0] + "," + couleursplit[1] + "," + couleursplit[2] + ")"
-        boutonColor.style["width"] = "50%";
+
+
     }
 
     xglobal = 0
@@ -121,9 +132,11 @@ function game() {
     function changeColor(e) {
 
 
+
         if (chosenColor == "") {
             alert("Vous devez d'abord choisir une couleur")
         } else {
+
 
 
             xC = Math.round(e.getBoundingClientRect().x)
@@ -185,9 +198,8 @@ function game() {
 
             ctx.putImageData(data, 0, 0);
 
-            chosenColor = ""
-            boutonColor.style["background-color"] = "rgb(200,200,200)"
-            boutonColor.style["width"] = "10%"
+
+
         }
     }
 
@@ -256,7 +268,7 @@ function game() {
 
     var ctx = canvas.getContext("2d");
     var image = new Image();
-    boutonColor = document.getElementById("chosenColor")
+
 
     image.crossOrigin = "anonymous";
     couleurs = {}
@@ -345,17 +357,27 @@ function game() {
                         document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].appendChild(star);
                         document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
 
+                        clipDiv = document.createElement("div");
+                        clipDiv.id = "clipDiv";
+
                         clip = document.createElement("input");
                         clip.value = "PARTAGER";
                         clip.type = "button";
                         clip.id = "clip";
-                        document.getElementById("resultat").appendChild(clip);
+
+                        clipAlert = document.createElement('div');
+                        clipAlert.innerHTML = "Copié dans le presse-papier";
+                        clipAlert.id = "clipAlert"
+
+                        clipDiv.appendChild(clip);
+                        clipDiv.appendChild(clipAlert);
+                        document.getElementById("resultat").appendChild(clipDiv);
                         clip.addEventListener('click', copyToClipBoard);
 
 
                         document.getElementById("DivMain").style["display"] = "none";
                         document.getElementById("DivMain2").style["display"] = "none";
-                        document.getElementById("chosenColor").style["display"] = "none";
+
                         document.getElementById("button").style["display"] = "none";
                         document.getElementById("guessCountry").style["display"] = "none";
 
@@ -365,12 +387,20 @@ function game() {
                         document.getElementById("resultat").style["display"] = "block";
 
                     } else if (star == "0") {
-
+                        clipDiv = document.createElement("div");
+                        clipDiv.id = "clipDiv";
                         clip = document.createElement("input");
                         clip.value = "PARTAGER";
                         clip.type = "button";
                         clip.id = "clip";
-                        document.getElementById("resultat").appendChild(clip);
+
+                        clipAlert = document.createElement('div');
+                        clipAlert.innerHTML = "Copié dans le presse-papier";
+                        clipAlert.id = "clipAlert"
+
+                        clipDiv.appendChild(clip);
+                        clipDiv.appendChild(clipAlert);
+                        document.getElementById("resultat").appendChild(clipDiv);
                         clip.addEventListener('click', copyToClipBoard);
                         document.getElementById("DivMain").style["display"] = "none";
                         document.getElementById("DivMain2").style["display"] = "none";
@@ -390,13 +420,21 @@ function game() {
                         document.getElementById("chosenColor").style["display"] = "none";
                         document.getElementById("button").style["display"] = "none";
                         document.getElementById("guessCountry").style["display"] = "none";
-
+                        clipDiv = document.createElement("div");
+                        clipDiv.id = "clipDiv";
 
                         clip = document.createElement("input");
                         clip.value = "PARTAGER";
                         clip.type = "button";
                         clip.id = "clip";
-                        document.getElementById("resultat").appendChild(clip);
+
+                        clipAlert = document.createElement('div');
+                        clipAlert.innerHTML = "Copié dans le presse-papier";
+                        clipAlert.id = "clipAlert"
+
+                        clipDiv.appendChild(clip);
+                        clipDiv.appendChild(clipAlert);
+                        document.getElementById("resultat").appendChild(clipDiv);
                         clip.addEventListener('click', copyToClipBoard);
 
                         document.getElementById("myCanvas").style["display"] = "none";
@@ -460,7 +498,7 @@ function game() {
                         pixelsCol.push(pixels.slice(i, i + 4));
                     }
 
-                    console.log(good_colors)
+
                     for (col of good_colors) {
                         pix = []
                         for (var indexPixel = 0; indexPixel < pixelsColOriginal.length; indexPixel++) {
@@ -471,7 +509,7 @@ function game() {
                                 pixelsCol[indexPixel][2] = col.split(',')[2];
                             }
                         }
-                        console.log(pix)
+
                         newPixel = []
                         for (elt of pixelsCol) {
                             for (p of elt) {
@@ -571,81 +609,98 @@ function game() {
             var str = [r, g, b].join();
             couleurs[str] = couleurs[str] ? couleurs[str] + 1 : 1;
         }
-
+        /*
         for (colEntry of Object.entries(couleurs)) {
             if (colEntry[1] * 100 / (height * width) < 0.5) {
                 delete couleurs[colEntry[0]];
             }
         }
-        for (var i = 0; i < Object.entries(couleurs).length; i++) {
-
-            if (CHOSENPAYISO.toLowerCase() == "ar") {
-                if (Object.entries(couleurs)[i][1] > 1450) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            } else if (CHOSENPAYISO.toLowerCase() == "aw") {
-                if (Object.entries(couleurs)[i][1] > 2680) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
+        */
+        sortedCol = Object.entries(couleurs)
+        sortedCol = sortedCol.sort((a, b) => b[1] - a[1]).filter(a => a[1] * 100 / (height * width) >= 0.5)
+        couleurs = {}
+        if (CHOSENPAYISO.toLowerCase() == "as") {
+            for (let key of sortedCol.slice(0, 4)) {
+                couleurs[key[0]] = key[1]
             }
-            else if (CHOSENPAYISO.toLowerCase() == "br") {
-                if (Object.entries(couleurs)[i][1] > 2380) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else if (CHOSENPAYISO.toLowerCase() == "ky") {
-                if (Object.entries(couleurs)[i][1] > 1500) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else if (CHOSENPAYISO.toLowerCase() == "fj") {
-                if (Object.entries(couleurs)[i][1] > 1450) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else if (CHOSENPAYISO.toLowerCase() == "gt") {
-                if (Object.entries(couleurs)[i][1] > 800) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else if (CHOSENPAYISO.toLowerCase() == "lr") {
-                if (Object.entries(couleurs)[i][1] > 3000) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else if (CHOSENPAYISO.toLowerCase() == "mp") {
-                if (Object.entries(couleurs)[i][1] > 3000) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else if (CHOSENPAYISO.toLowerCase() == "sm") {
-                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else if (CHOSENPAYISO.toLowerCase() == "tk") {
-                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
-                }
-            }
-            else {
-                if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 1) {
-                    console.log({ "col": Object.entries(couleurs)[i] })
-                    trueColor.push(Object.entries(couleurs)[i][0]);
+        } else {
+            for (let key of sortedCol) {
+                if (key[1] * 100 / (height * width) > 1) {
+                    couleurs[key[0]] = key[1]
+                    trueColor.push(key[0])
                 }
             }
         }
-
+        /*
+                for (var i = 0; i < Object.entries(couleurs).length; i++) {
+        
+                    if (CHOSENPAYISO.toLowerCase() == "ar") {
+                        if (Object.entries(couleurs)[i][1] > 1450) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    } else if (CHOSENPAYISO.toLowerCase() == "aw") {
+                        if (Object.entries(couleurs)[i][1] > 2680) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "br") {
+                        if (Object.entries(couleurs)[i][1] > 2380) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "ky") {
+                        if (Object.entries(couleurs)[i][1] > 1500) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "fj") {
+                        if (Object.entries(couleurs)[i][1] > 1450) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "gt") {
+                        if (Object.entries(couleurs)[i][1] > 800) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "lr") {
+                        if (Object.entries(couleurs)[i][1] > 3000) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "mp") {
+                        if (Object.entries(couleurs)[i][1] > 3000) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "sm") {
+                        if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else if (CHOSENPAYISO.toLowerCase() == "tk") {
+                        if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 0.5) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                    else {
+                        if (Object.entries(couleurs)[i][1] * 100 / (height * width) > 1) {
+        
+                            trueColor.push(Object.entries(couleurs)[i][0]);
+                        }
+                    }
+                }
+        */
         spectreCol(trueColor)
 
 
@@ -661,7 +716,7 @@ function game() {
                 pixelsCol[i] = [1, 1, 1, 255];
             }
         }
-        boutonColor.style["width"] = canvas.width
+
         classColor = document.getElementsByClassName("color")
         classColor2 = document.getElementsByClassName("colore")
         for (divElt of classColor) {
@@ -732,25 +787,42 @@ function game() {
 
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].appendChild(star)
             document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
-
+            clipDiv = document.createElement("div");
+            clipDiv.id = "clipDiv";
             clip = document.createElement("input");
             clip.value = "PARTAGER";
             clip.type = "button";
             clip.id = "clip";
             clip.addEventListener('click', copyToClipBoard);
-            document.getElementById("resultat").appendChild(clip);
+
+            clipAlert = document.createElement('div');
+            clipAlert.innerHTML = "Copié dans le presse-papier";
+            clipAlert.id = "clipAlert"
+
+
+            clipDiv.appendChild(clip);
+            clipDiv.appendChild(clipAlert);
+            document.getElementById("resultat").appendChild(clipDiv);
         } else {
             starBol = 0;
             h2 = document.querySelector("h2")
             h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY
-
+            clipDiv = document.createElement("div");
+            clipDiv.id = "clipDiv";
 
             clip = document.createElement("input");
             clip.value = "PARTAGER";
             clip.type = "button";
             clip.id = "clip";
             clip.addEventListener('click', copyToClipBoard);
-            document.getElementById("resultat").appendChild(clip);
+
+            clipAlert = document.createElement('div');
+            clipAlert.innerHTML = "Copié dans le presse-papier";
+            clipAlert.id = "clipAlert"
+
+            clipDiv.appendChild(clip);
+            clipDiv.appendChild(clipAlert);
+            document.getElementById("resultat").appendChild(clipDiv);
         }
 
         guesses = JSON.parse(localStorage["guesses"])
@@ -791,7 +863,7 @@ function game() {
             mauvais = 0;
             nbrCoups = { "1/6": 0, "2/6": 0, "3/6": 0, "4/6": 0, "5/6": 0, "6/6": 0, "-/6": 0 };
             for (day of Object.keys(guesses)) {
-                console.log(guesses[day])
+
                 m = guesses[day]["totalTries"].length;
                 if (guesses[day].hasOwnProperty("win")) {
                     nbrCoups[String(m) + "/6"]++;
@@ -886,9 +958,7 @@ function game() {
             guessDate["totalTries"] = [];
         }
         guessDate["totalTries"].push(totTries);
-        console.log(bol)
-        console.log(guessDate)
-        console.log(guessDate.hasOwnProperty("data"))
+
         if (bol) {
             if (guessDate.hasOwnProperty("data")) {
                 delete guessDate["data"];
@@ -999,9 +1069,7 @@ function game() {
             }
         }
         almost_colors = almost_colors.filter((e) => { return !good_colors.includes(e) })
-        console.log(good_colors)
-        console.log(almost_colors)
-        console.log(wrong_colors)
+
         totalTries = [good_colors.length, almost_colors.length]
 
         divTry = document.createElement("div");
@@ -1085,13 +1153,13 @@ function game() {
                 vic = false
             }
         }
-        console.log(trueColor)
+
         for (key of Object.keys(usedColor)) {
             if (!trueColor.includes(key)) {
                 delete usedColor[key]
             }
         }
-        console.log(totalTries)
+
 
 
 
@@ -1103,7 +1171,7 @@ function game() {
             h2.innerHTML = "Bravo ! Rendez-vous demain pour le prochain défi 🚀\nPouvez vous deviner à qui appartient ce drapeau?"
             document.getElementById("DivMain").style["display"] = "none"
             document.getElementById("DivMain2").style["display"] = "none"
-            document.getElementById("chosenColor").style["display"] = "none"
+
             document.getElementById("button").style["display"] = "none"
             document.getElementById("guessCountry").style["display"] = "block"
 
@@ -1121,20 +1189,29 @@ function game() {
             document.getElementById("reponse").style["display"] = "flex"
             document.getElementById("DivMain").style["display"] = "none"
             document.getElementById("DivMain2").style["display"] = "none"
-            document.getElementById("chosenColor").style["display"] = "none"
+
             document.getElementById("resultat").style["display"] = "block"
 
             document.getElementById("button").removeEventListener('click', valider)
+            clipDiv = document.createElement("div");
+            clipDiv.id = "clipDiv";
             clip = document.createElement("input");
             clip.value = "PARTAGER";
             clip.type = "button";
             clip.id = "clip";
             clip.addEventListener('click', copyToClipBoard);
-            document.getElementById("resultat").appendChild(clip);
+
+            clipAlert = document.createElement('div');
+            clipAlert.innerHTML = "Copié dans le presse-papier";
+            clipAlert.id = "clipAlert"
+
+            clipDiv.appendChild(clip);
+            clipDiv.appendChild(clipAlert);
+            document.getElementById("resultat").appendChild(clipDiv);
             bolChangeLocalStorage = true;
 
         }
-        console.log(bolChangeLocalStorage)
+
 
         saveToStorageData(V, totalTries, good_colors, almost_colors, wrong_colors, bolChangeLocalStorage);
 
@@ -1200,7 +1277,7 @@ function game() {
     CHOSENPAY = Object.keys(countries)[index].trim()
 
 
-    console.log(CHOSENPAY)
+
 
     image.src = "https://flagcdn.com/w640/" + CHOSENPAYISO + ".png";
     /*
@@ -1258,7 +1335,9 @@ close2.addEventListener('click', () => {
 
 })
 
+pix = document.getElementById("open").offsetHeight
 
+document.getElementById("page-header").style['height'] = String(pix + 6) + "px"
 
 
 
