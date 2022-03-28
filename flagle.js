@@ -169,29 +169,18 @@ function game() {
 
 
 
-    colors = ["#800000"
-
-
-        , "#FF4500"
-        , "#D2691E"
-
-        , "#FFD700"
-
-
-        , "#008000"
-        , "#40E0D0"
-
-        , "#008080"
-
-        , "#000080"
-
-        , "#DDA0DD"
-
-        , "#D2B48C"
+    colors = ["#12ad2b"
+        , "#01411c"
+        , "#5eb6e4"
+        , "#21468b"
+        , "#ffe000"
+        , "#dd7500"
+        , "#ffffff"
+        , "#000000"
+        , "#ff0000"
+        , "#800000"
         , "#808080"
-
-        , "#FFFFFF"
-        , "#000000"]
+        , "#bfb373"]
     colorsRGB = []
     for (var i = 0; i < colors.length; i++) {
         colorsRGB.push(hextoRGB(colors[i]));
@@ -283,6 +272,11 @@ function game() {
                 trueColor.push(key[0])
             }
         } else if (CHOSENPAYISO.toLowerCase() == "li") {
+            for (let key of sortedCol.slice(0, 3)) {
+                couleurs[key[0]] = key[1]
+                trueColor.push(key[0])
+            }
+        } else if (CHOSENPAYISO.toLowerCase() == "cy") {
             for (let key of sortedCol.slice(0, 3)) {
                 couleurs[key[0]] = key[1]
                 trueColor.push(key[0])
@@ -720,7 +714,7 @@ function game() {
     index = Math.floor(p * (Object.keys(countries).length - 1))
 
     CHOSENPAYISO = countries[Object.keys(countries)[index]].toLowerCase()
-    //CHOSENPAYISO = "tm"
+    //CHOSENPAYISO = "sm"
 
 
 
