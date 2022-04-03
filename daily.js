@@ -719,15 +719,7 @@ function game() {
 
         classColor = document.getElementsByClassName("color")
         classColor2 = document.getElementsByClassName("colore")
-        for (divElt of classColor) {
-            divElt.style["width"] = canvas.width * 2 / classColor.length
-            divElt.style["height"] = canvas.width * 2 / classColor.length
 
-        }
-        for (divElt of classColor2) {
-            divElt.style["width"] = canvas.width * 3 / classColor2.length
-            divElt.style["height"] = canvas.width * 3 / classColor2.length
-        }
         newPixels = []
         for (elt of pixelsCol) {
             for (c of elt) {
@@ -1339,6 +1331,9 @@ pix = document.getElementById("open").offsetHeight
 
 document.getElementById("page-header").style['height'] = String(pix + 6) + "px"
 
-
+window.addEventListener("orientationchange", function () {
+    // Announce the new orientation number
+    location.reload();
+}, false);
 
 game();

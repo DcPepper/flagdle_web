@@ -7,152 +7,164 @@
 
 </head>
 
-<body>
-    <header id="page-header">
+<div id="turn">
 
-        <h1> <input type="button" id="open" value="?"><input type="button" id="home" value="X"
-                onclick="window.location.href='index.html'"><span id="F">F</span><span id="L">L</span><span
-                id="A">A</span><span id="G">G</span><span id="L2">L</span><span id="E">E</span></h1>
+    <body>
+        <header id="page-header">
 
-    </header>
-    <h3 id="serie"></h3>
-    <h2 id="nbrC">Il y a couleurs à trouver</h2>
-    <div id="test">
-        <div id="CANVAS">
-            <div id="grosCANVA">
-                <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
-                    Your browser does not support the HTML canvas tag.</canvas>
-                <canvas id="reponse" width="200" height="100" style="display: none;"></canvas>
-            </div>
-            <div id="miniCANVA">
-                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
-                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
-                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
-                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
-                <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+            <h1> <input type="button" id="open" value="?"><input type="button" id="home" value="X"
+                    onclick="window.location.href='index.html'"><span id="F">F</span><span id="L">L</span><span
+                    id="A">A</span><span id="G">G</span><span id="L2">L</span><span id="E">E</span></h1>
+
+        </header>
+        <div id="chrono">
+            <h4><time>00:00:00</time></h4>
+            <h4 id="nbrDrapeau" style="margin-left:10px">1/243</h4>
+        </div>
+        <h2 id="nbrC">Il y a couleurs à trouver</h2>
+        <div id="test">
+            <div id="CANVAS">
+                <div id="grosCANVA">
+                    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
+                        Your browser does not support the HTML canvas tag.</canvas>
+                    <canvas id="reponse" width="200" height="100" style="display: none;"></canvas>
+                </div>
+                <div id="miniCANVA">
+                    <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                    <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                    <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                    <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                    <canvas class="mini" style="border:1px solid #d3d3d3;"></canvas>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="subDiv">
-        <input type="button" id="button" value="Valider">
-        <!--<img src="https://flagcdn.com/w640/az.png"
+        <div id="subDiv">
+            <input type="button" id="button" value="Valider">
+            <!--<img src="https://flagcdn.com/w640/az.png"
         srcset="https://flagcdn.com/w1280/az.png 2x" width="640" alt="Hungary">-->
 
-    </div>
-    <div id="DivMain">
-
-
-        <div id="#01411C." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#01411C" class="color" style="background-color: rgb(200, 200, 200);"></div>
         </div>
-
-        <div id="#21468B." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#21468B" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-        <div id="#DD7500." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#DD7500" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-
-        <div id="#000000." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#000000" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
+        <div id="DivMain">
 
 
-
-        <div id="#800000." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#800000" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-        <div id="#BFB373." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#BFB373" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-
-
-
-    </div>
-    <div id="DivMain2">
-
-
-
-        <div id="#12AD2B." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#12AD2B" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-
-
-
-        <div id="#5EB6E4." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#5EB6E4" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-
-
-        <div id="#FFE000." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#FFE000" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-        <div id="#FFFFFF." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#FFFFFF" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-
-        <div id="#FF0000." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#FF0000" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-        <div id="#808080." class="colore" style="background-color: rgb(200, 200, 200);">
-            <div id="#808080" class="color" style="background-color: rgb(200, 200, 200);"></div>
-        </div>
-    </div>
-
-    <div id="guessCountry">
-        <input type="text" name="" id="search" placeholder="France" list="pays">
-        <datalist id="pays">
-
-        </datalist>
-        <input type="button" id="button2" value="Valider">
-    </div>
-    <div id="resultat">
-
-    </div>
-
-
-
-    <div class="modal" id="modal">
-        <div class="regles">
-            <div id="rules" style="width: 100%;">
-                <h3 style="padding-left: 40%; text-decoration: underline;"> Règles du jeu</h3>
-                <p style="padding-left: 5px;">Inspiré des jeux Wordle et Worldle, vous avez 6 essais pour trouver toutes
-                    les couleurs du drapeau. Le nombre
-                    de
-                    couleurs à trouver est indiqué au dessus du drapeau. Pour jouer, vous devez:<br>
-
-                    <span style="padding-left: 10px;">1. Choisir une couleur en cliquant sur le bouton de la couleur
-                        souhaitée.</span> <br>
-                    <span style="padding-left: 10px;">2. Placer la couleur sur le drapeau.<br></span>
-                    <span style="padding-left: 10px;">3. Recommencer les étapes 1. et 2. pour toutes les couleurs que
-                        vous souhaitez deviner.<br></span>
-                </p>
-                <img src="2022-03-25_11-05-40__online-video-cutter_com__AdobeCreativeCloudExpress.gif" alt="couleurs"
-                    style="padding-left: 30%;">
-                <p style="padding-left: 5px;">
-                    <span style="text-decoration: underline;">Légende:</span> <span
-                        style="color: green;">vert:</span>couleur bien placée, <span
-                        style="color: yellow;">jaune:</span> couleur
-                    mal placée, <span style="font-weight: bold;">noir:</span> mauvaise couleur
-                </p>
-                <p>L'historique des essais apparait à droite du drapeau.<br>
-                    Recommencer les étapes 1 à 3 jusqu'à avoir trouvé toutes les couleurs du drapeau.
-                </p>
-                <p>
-                    A la fin de la partie (vous avez trouvé toutes les couleurs <span
-                        style="font-weight: bold;">OU</span> vous avez fait 6 essaies), le drapeau original
-                    apparaît.<br>
-                    Le message au dessus du drapeau vous indique si vous avez gagné ou perdu.<br>
-                    En cas de victoire, vous avez 1 chance pour deviner le nom du drapeau.
-                </p>
-                <p>Votre score apparait, n'hésitez pas à le partager avec vos amis !</p>
-
+            <div id="#01411C." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#01411C" class="color" style="background-color: rgb(200, 200, 200);"></div>
             </div>
-            <button id="close">X</button>
-        </div>
-    </div>
 
-    <script src="flagle.js"></script>
-</body>
+            <div id="#21468B." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#21468B" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+            <div id="#DD7500." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#DD7500" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+
+            <div id="#000000." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#000000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+
+
+
+            <div id="#800000." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#800000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+            <div id="#BFB373." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#BFB373" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+
+
+
+        </div>
+        <div id="DivMain2">
+
+
+
+            <div id="#12AD2B." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#12AD2B" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+
+
+
+            <div id="#5EB6E4." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#5EB6E4" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+
+
+            <div id="#FFE000." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#FFE000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+            <div id="#FFFFFF." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#FFFFFF" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+
+            <div id="#FF0000." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#FF0000" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+            <div id="#808080." class="colore" style="background-color: rgb(200, 200, 200);">
+                <div id="#808080" class="color" style="background-color: rgb(200, 200, 200);"></div>
+            </div>
+        </div>
+
+        <div id="guessCountry">
+            <input type="text" name="" id="search" placeholder="France" list="pays">
+            <datalist id="pays">
+
+            </datalist>
+            <input type="button" id="button2" value="Valider">
+        </div>
+        <div id="resultat">
+
+        </div>
+
+
+
+        <div class="modal" id="modal">
+            <div class="regles">
+                <div id="rules" style="width: 100%;">
+                    <h3 style="padding-left: 40%; text-decoration: underline;"> Règles du jeu</h3>
+                    <p style="padding-left: 5px;">Inspiré des jeux Wordle et Worldle, vous avez 6 essais pour trouver
+                        toutes
+                        les couleurs du drapeau. Le nombre
+                        de
+                        couleurs à trouver est indiqué au dessus du drapeau. Pour jouer, vous devez:<br>
+
+                        <span style="padding-left: 10px;">1. Choisir une couleur en cliquant sur le bouton de la couleur
+                            souhaitée.</span> <br>
+                        <span style="padding-left: 10px;">2. Placer la couleur sur le drapeau.<br></span>
+                        <span style="padding-left: 10px;">3. Recommencer les étapes 1. et 2. pour toutes les couleurs
+                            que
+                            vous souhaitez deviner.<br></span>
+                    </p>
+                    <img src="2022-03-25_11-05-40__online-video-cutter_com__AdobeCreativeCloudExpress.gif"
+                        alt="couleurs" style="padding-left: 30%;">
+                    <p style="padding-left: 5px;">
+                        <span style="text-decoration: underline;">Légende:</span> <span
+                            style="color: green;">vert:</span>couleur bien placée, <span
+                            style="color: yellow;">jaune:</span> couleur
+                        mal placée, <span style="font-weight: bold;">noir:</span> mauvaise couleur
+                    </p>
+                    <p>L'historique des essais apparait à droite du drapeau.<br>
+                        Recommencer les étapes 1 à 3 jusqu'à avoir trouvé toutes les couleurs du drapeau.
+                    </p>
+                    <p>
+                        A la fin de la partie (vous avez trouvé toutes les couleurs <span
+                            style="font-weight: bold;">OU</span> vous avez fait 6 essaies), le drapeau original
+                        apparaît.<br>
+                        Le message au dessus du drapeau vous indique si vous avez gagné ou perdu.<br>
+                        En cas de victoire, vous avez 1 chance pour deviner le nom du drapeau.
+                    </p>
+                    <p>Votre score apparait, n'hésitez pas à le partager avec vos amis !</p>
+
+                </div>
+                <button id="close">X</button>
+            </div>
+        </div>
+
+
+
+
+        <script src="flagle.js"></script>
+    </body>
+</div>
+<div id="turnnot"><img src="tilt.gif"></div>
 
 </html>

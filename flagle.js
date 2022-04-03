@@ -428,25 +428,31 @@ function game() {
     V = -1
 
     function validerCountry() {
+
+        clearTimeout(t);
+
         text = document.getElementById("search").value;
         if (text.toLowerCase() == CHOSENPAY.toLowerCase()) {
-
+            marathon = JSON.parse(localStorage.getItem("Marathon"));
+            if (marathon["nbr"]) {
+                marathon["nbr"]++;
+            } else {
+                marathon["nbr"] = 1;
+            }
+            marathon["Running"] = "1";
+            marathon['time'] = document.querySelector('h4').textContent;
 
             h2 = document.querySelector("h2")
             h2.innerHTML = "Bonne réponse ! (" + CHOSENPAY + ")";
-
-            star = document.createElement("div")
-            star.id = "star-five"
             rejouer = document.createElement('input');
             rejouer.type = "button"
             rejouer.id = "rejouer"
             rejouer.value = "Suivant"
             rejouer.addEventListener('click', reload)
-
-            document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].appendChild(star)
-            document.getElementById("resultat").children[document.getElementById("resultat").children.length - 1].style["margin-left"] = "45px";
         } else {
-
+            marathon['time'] = '0:0:0';
+            marathon = JSON.parse(localStorage.getItem("Marathon"));
+            delete marathon["index"];
             h2 = document.querySelector("h2")
             h2.innerHTML = "Dommage ! C'est le drapeau de " + CHOSENPAY
             rejouer = document.createElement('input');
@@ -455,6 +461,8 @@ function game() {
             rejouer.value = "Rejouer"
             rejouer.addEventListener('click', reload)
         }
+        localStorage.setItem("Marathon", JSON.stringify(marathon));
+
         document.getElementById("button2").removeEventListener('click', validerCountry)
 
         document.getElementById('resultat').appendChild(rejouer);
@@ -566,51 +574,6 @@ function game() {
 
         totalTries = [good_colors.length, almost_colors.length]
 
-        divTry = document.createElement("div");
-        divTry.id = "divTry" + V;
-
-        divTry.style["display"] = "flex";
-        divTry.style["justify-content"] = "center";
-
-        document.getElementById("resultat").appendChild(divTry)
-
-        for (var i = 0; i < 2; i++) {
-            if (i == 0) {
-
-                for (j = 0; j < totalTries[i]; j++) {
-
-                    divCol = document.createElement("div");
-                    divCol.classList.add("blockCol");
-                    divCol.style["border"] = "solid 1px";
-                    divCol.style["background-color"] = "#67e56d";
-                    document.getElementById("divTry" + V).appendChild(divCol)
-                }
-            }
-            else {
-
-                for (j = 0; j < totalTries[i]; j++) {
-
-                    divCol = document.createElement("div");
-                    divCol.classList.add("blockCol");
-                    divCol.style["border"] = "solid 1px;";
-                    divCol.style["background-color"] = "yellow";
-                    document.getElementById("divTry" + V).appendChild(divCol)
-                }
-            }
-        }
-        ent = totalTries[0] + totalTries[1]
-
-        for (i = 0; i < trueColor.length - ent; i++) {
-
-            divCol = document.createElement("div");
-            divCol.classList.add("blockCol");
-            divCol.style["border"] = "solid 1px;";
-            divCol.style["background-color"] = "rgb(200,200,200)";
-            document.getElementById("divTry" + V).appendChild(divCol)
-        }
-
-
-
         for (var i = 0; i < pixelsCol.length; i++) {
             pixColOri = pixelsColOriginal[i].join()
             pixCol = pixelsCol[i].join()
@@ -699,7 +662,7 @@ function game() {
     document.body.style["backgroundColor"] = "rgb( 1, 33, 105);"
 
     countries = {
-        'Afghanistan ': 'AF', 'Afrique du Sud ': 'ZA', 'Åland, Îles ': 'AX', 'Albanie ': 'AL', 'Algérie ': 'DZ', 'Allemagne ': 'DE', 'Andorre ': 'AD', 'Angola ': 'AO', 'Anguilla ': 'AI', 'Antarctique ': 'AQ', 'Antigua et Barbuda ': 'AG', 'Arabie Saoudite ': 'SA', 'Argentine ': 'AR', 'Arménie ': 'AM', 'Aruba ': 'AW', 'Australie ': 'AU', 'Autriche ': 'AT', 'Azerbaïdjan ': 'AZ', 'Bahamas ': 'BS', 'Bahrein ': 'BH', 'Bangladesh ': 'BD', 'Barbade ': 'BB', 'Bélarus ': 'BY', 'Belgique ': 'BE', 'Bélize ': 'BZ', 'Bénin ': 'BJ', 'Bermudes ': 'BM', 'Bhoutan ': 'BT', 'Bolivie(État plurinational de) ': 'BO', 'Bonaire, Saint- Eustache et Saba ': 'BQ', 'Bosnie - Herzégovine ': 'BA', 'Botswana ': 'BW', 'Brésil ': 'BR', 'Brunéi Darussalam ': 'BN', 'Bulgarie ': 'BG', 'Burkina Faso ': 'BF', 'Burundi ': 'BI', 'Cabo Verde ': 'CV', 'Caïmans, Iles ': 'KY', 'Cambodge ': 'KH', 'Cameroun ': 'CM', 'Canada ': 'CA', 'Chili ': 'CL', 'Chine ': 'CN', 'Christmas, île ': 'CX', 'Chypre ': 'CY', 'Cocos / Keeling(Îles) ': 'CC', 'Colombie ': 'CO', 'Comores ': 'KM', 'Congo ': 'CG', 'Congo, République démocratique du ': 'CD', 'Cook, Iles ': 'CK', 'Corée, République de ': 'KR', 'Corée, République populaire démocratique de ': 'KP', 'Costa Rica ': 'CR', "Côte d'Ivoire ": 'CI', 'Croatie ': 'HR', 'Cuba ': 'CU', 'Curaçao ': 'CW', 'Danemark ': 'DK', 'Djibouti ': 'DJ', 'Dominicaine, République ': 'DO', 'Dominique ': 'DM', 'Egypte ': 'EG', 'El Salvador ': 'SV', 'Emirats arabes unis ': 'AE', 'Equateur ': 'EC', 'Erythrée ': 'ER', 'Espagne ': 'ES', 'Estonie ': 'EE', "Etats - Unis d'Amérique ": 'US', 'Ethiopie ': 'ET', 'Falkland / Malouines(Îles) ': 'FK', 'Féroé, îles ': 'FO', 'Fidji ': 'FJ', 'Finlande ': 'FI', 'France ': 'FR', 'Gabon ': 'GA', 'Gambie ': 'GM', 'Géorgie ': 'GE', 'Géorgie du sud et les îles Sandwich du sud ': 'GS', 'Ghana ': 'GH', 'Gibraltar ': 'GI', 'Grèce ': 'GR', 'Grenade ': 'GD', 'Groenland ': 'GL', 'Guadeloupe ': 'GP', 'Guam ': 'GU', 'Guatemala ': 'GT', 'Guernesey ': 'GG', 'Guinée ': 'GN', 'Guinée - Bissau ': 'GW', 'Guinée équatoriale ': 'GQ', 'Guyana ': 'GY', 'Guyane française ': 'GF', 'Haïti ': 'HT', 'Honduras ': 'HN', 'Hong Kong ': 'HK', 'Hongrie ': 'HU', 'Île de Man ': 'IM', 'Îles vierges britanniques ': 'VG', 'Îles vierges des Etats - Unis ': 'VI', 'Inde ': 'IN', "Indien (Territoire britannique de l'océan) ": 'IO', 'Indonésie ': 'ID', "Iran, République islamique d' ": 'IR', 'Iraq ': 'IQ', 'Irlande ': 'IE', 'Islande ': 'IS', 'Israël ': 'IL', 'Italie ': 'IT', 'Jamaïque ': 'JM', 'Japon ': 'JP', 'Jersey ': 'JE', 'Jordanie ': 'JO', 'Kazakhstan ': 'KZ', 'Kenya ': 'KE', 'Kirghizistan ': 'KG', 'Kiribati ': 'KI', 'Koweït ': 'KW', 'Lao, République démocratique populaire ': 'LA', 'Lesotho ': 'LS', 'Lettonie ': 'LV', 'Liban ': 'LB', 'Libéria ': 'LR', 'Libye ': 'LY', 'Liechtenstein ': 'LI', 'Lituanie ': 'LT', 'Luxembourg ': 'LU', 'Macao ': 'MO', "Macédoine, l'ex - République yougoslave de ": 'MK', 'Madagascar ': 'MG', 'Malaisie ': 'MY', 'Malawi ': 'MW', 'Maldives ': 'MV', 'Mali ': 'ML', 'Malte ': 'MT', 'Mariannes du nord, Iles ': 'MP', 'Maroc ': 'MA', 'Marshall, Iles ': 'MH', 'Martinique ': 'MQ', 'Maurice ': 'MU', 'Mauritanie ': 'MR', 'Mayotte ': 'YT', 'Mexique ': 'MX', 'Micronésie, Etats Fédérés de ': 'FM', 'Moldova, République de ': 'MD', 'Monaco ': 'MC', 'Mongolie ': 'MN', 'Monténégro ': 'ME', 'Montserrat ': 'MS', 'Mozambique ': 'MZ', 'Myanmar ': 'MM', 'Namibie ': 'NA', 'Nauru ': 'NR', 'Népal ': 'NP', 'Nicaragua ': 'NI', 'Niger ': 'NE', 'Nigéria ': 'NG', 'Niue ': 'NU', 'Norfolk, Ile ': 'NF', 'Norvège ': 'NO', 'Nouvelle - Calédonie ': 'NC', 'Nouvelle - Zélande ': 'NZ', 'Oman ': 'OM', 'Ouganda ': 'UG', 'Ouzbékistan ': 'UZ', 'Pakistan ': 'PK', 'Palaos ': 'PW', 'Palestine, Etat de ': 'PS', 'Panama ': 'PA', 'Papouasie - Nouvelle - Guinée ': 'PG', 'Paraguay ': 'PY', 'Pays - Bas ': 'NL', 'Pérou ': 'PE', 'Philippines ': 'PH', 'Pitcairn ': 'PN', 'Pologne ': 'PL', 'Polynésie française ': 'PF', 'Porto Rico ': 'PR', 'Portugal': 'PT', 'Qatar ': 'QA', 'République arabe syrienne ': 'SY', 'République centrafricaine ': 'CF', 'Réunion ': 'RE', 'Roumanie ': 'RO', "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord ": 'GB', 'Russie, Fédération de ': 'RU', 'Rwanda ': 'RW', 'Sahara occidental ': 'EH', 'Saint-Barthélemy ': 'BL', 'Saint-Kitts-et-Nevis ': 'KN', 'Saint-Marin ': 'SM', 'Saint-Martin (partie française) ': 'MF', 'Saint-Pierre-et-Miquelon ': 'PM', 'Saint-Siège ': 'VA', 'Saint-Vincent-et-les-Grenadines ': 'VC', 'Sainte-Hélène, Ascension et Tristan da Cunha ': 'SH', 'Sainte-Lucie ': 'LC', 'Salomon, Iles ': 'SB', 'Samoa ': 'WS', 'Samoa américaines ': 'AS', 'Sao Tomé-et-Principe ': 'ST', 'Sénégal ': 'SN', 'Serbie ': 'RS', 'Seychelles ': 'SC', 'Sierra Leone ': 'SL', 'Singapour ': 'SG', 'Slovaquie ': 'SK', 'Slovénie ': 'SI', 'Somalie ': 'SO', 'Soudan ': 'SD', 'Soudan du Sud ': 'SS', 'Sri Lanka ': 'LK', 'Suède ': 'SE', 'Suisse ': 'CH', 'Suriname ': 'SR', 'Svalbard et île Jan Mayen ': 'SJ', 'Swaziland ': 'SZ', 'Tadjikistan ': 'TJ', 'Taïwan, Province de Chine ': 'TW', 'Tanzanie, République unie de ': 'TZ', 'Tchad ': 'TD', 'Tchèque, République ': 'CZ', 'Terres australes françaises ': 'TF', 'Thaïlande ': 'TH', 'Timor-Leste ': 'TL', 'Togo ': 'TG', 'Tokelau ': 'TK', 'Tonga ': 'TO', 'Trinité-et-Tobago ': 'TT', 'Tunisie ': 'TN', 'Turkménistan ': 'TM', 'Turks-et-Caïcos (Îles) ': 'TC', 'Turquie ': 'TR', 'Tuvalu ': 'TV', 'Ukraine ': 'UA', 'Uruguay ': 'UY', 'Vanuatu ': 'VU', 'Venezuela (République bolivarienne du) ': 'VE', 'Viet Nam ': 'VN', 'Wallis et Futuna ': 'WF', 'Yémen ': 'YE', 'Zambie ': 'ZM', 'Zimbabwe ': 'ZW'
+        'Afghanistan ': 'AF', 'Afrique du Sud ': 'ZA', 'Iles Åland ': 'AX', 'Albanie ': 'AL', 'Algérie ': 'DZ', 'Allemagne ': 'DE', 'Andorre ': 'AD', 'Angola ': 'AO', 'Anguilla ': 'AI', 'Antarctique ': 'AQ', 'Antigua et Barbuda ': 'AG', 'Arabie Saoudite ': 'SA', 'Argentine ': 'AR', 'Arménie ': 'AM', 'Aruba ': 'AW', 'Australie ': 'AU', 'Autriche ': 'AT', 'Azerbaïdjan ': 'AZ', 'Bahamas ': 'BS', 'Bahrein ': 'BH', 'Bangladesh ': 'BD', 'Barbade ': 'BB', 'Bélarus ': 'BY', 'Belgique ': 'BE', 'Bélize ': 'BZ', 'Bénin ': 'BJ', 'Bermudes ': 'BM', 'Bhoutan ': 'BT', 'Bolivie ': 'BO', 'Bonaire, Saint- Eustache et Saba ': 'BQ', 'Bosnie - Herzégovine ': 'BA', 'Botswana ': 'BW', 'Brésil ': 'BR', 'Brunéi Darussalam ': 'BN', 'Bulgarie ': 'BG', 'Burkina Faso ': 'BF', 'Burundi ': 'BI', 'Cabo Verde ': 'CV', 'Iles Caïmans ': 'KY', 'Cambodge ': 'KH', 'Cameroun ': 'CM', 'Canada ': 'CA', 'Chili ': 'CL', 'Chine ': 'CN', 'Ile Christmas ': 'CX', 'Chypre ': 'CY', 'Iles Cocos / Keeling ': 'CC', 'Colombie ': 'CO', 'Comores ': 'KM', 'Congo ': 'CG', 'République démocratique du Congo ': 'CD', 'Iles Cook ': 'CK', 'Corée du Sud ': 'KR', 'Corée du Nord ': 'KP', 'Costa Rica ': 'CR', "Côte d'Ivoire ": 'CI', 'Croatie ': 'HR', 'Cuba ': 'CU', 'Curaçao ': 'CW', 'Danemark ': 'DK', 'Djibouti ': 'DJ', 'République Dominicaine ': 'DO', 'Dominique ': 'DM', 'Egypte ': 'EG', 'El Salvador ': 'SV', 'Emirats arabes unis ': 'AE', 'Equateur ': 'EC', 'Erythrée ': 'ER', 'Espagne ': 'ES', 'Estonie ': 'EE', "Etats - Unis d'Amérique ": 'US', 'Ethiopie ': 'ET', 'Iles Falkland / Malouines ': 'FK', 'Iles Féroé ': 'FO', 'Fidji ': 'FJ', 'Finlande ': 'FI', 'France ': 'FR', 'Gabon ': 'GA', 'Gambie ': 'GM', 'Géorgie ': 'GE', 'Géorgie du sud et les îles Sandwich du sud ': 'GS', 'Ghana ': 'GH', 'Gibraltar ': 'GI', 'Grèce ': 'GR', 'Grenade ': 'GD', 'Groenland ': 'GL', 'Guadeloupe ': 'GP', 'Guam ': 'GU', 'Guatemala ': 'GT', 'Guernesey ': 'GG', 'Guinée ': 'GN', 'Guinée - Bissau ': 'GW', 'Guinée équatoriale ': 'GQ', 'Guyana ': 'GY', 'Guyane française ': 'GF', 'Haïti ': 'HT', 'Honduras ': 'HN', 'Hong Kong ': 'HK', 'Hongrie ': 'HU', 'Île de Man ': 'IM', 'Îles vierges britanniques ': 'VG', 'Îles vierges des Etats - Unis ': 'VI', 'Inde ': 'IN', "Territoire britannique de l'océan Indien ": 'IO', 'Indonésie ': 'ID', "Iran ": 'IR', 'Iraq ': 'IQ', 'Irlande ': 'IE', 'Islande ': 'IS', 'Israël ': 'IL', 'Italie ': 'IT', 'Jamaïque ': 'JM', 'Japon ': 'JP', 'Jersey ': 'JE', 'Jordanie ': 'JO', 'Kazakhstan ': 'KZ', 'Kenya ': 'KE', 'Kirghizistan ': 'KG', 'Kiribati ': 'KI', 'Koweït ': 'KW', 'Laos ': 'LA', 'Lesotho ': 'LS', 'Lettonie ': 'LV', 'Liban ': 'LB', 'Libéria ': 'LR', 'Libye ': 'LY', 'Liechtenstein ': 'LI', 'Lituanie ': 'LT', 'Luxembourg ': 'LU', 'Macao ': 'MO', "Macédoine du Nord ": 'MK', 'Madagascar ': 'MG', 'Malaisie ': 'MY', 'Malawi ': 'MW', 'Maldives ': 'MV', 'Mali ': 'ML', 'Malte ': 'MT', 'Mariannes du nord ': 'MP', 'Maroc ': 'MA', 'Iles Marshall ': 'MH', 'Martinique ': 'MQ', 'Maurice ': 'MU', 'Mauritanie ': 'MR', 'Mayotte ': 'YT', 'Mexique ': 'MX', 'Micronésie ': 'FM', 'Moldavie ': 'MD', 'Monaco ': 'MC', 'Mongolie ': 'MN', 'Monténégro ': 'ME', 'Montserrat ': 'MS', 'Mozambique ': 'MZ', 'Myanmar ': 'MM', 'Namibie ': 'NA', 'Nauru ': 'NR', 'Népal ': 'NP', 'Nicaragua ': 'NI', 'Niger ': 'NE', 'Nigéria ': 'NG', 'Niue ': 'NU', 'Norfolk ': 'NF', 'Norvège ': 'NO', 'Nouvelle - Calédonie ': 'NC', 'Nouvelle - Zélande ': 'NZ', 'Oman ': 'OM', 'Ouganda ': 'UG', 'Ouzbékistan ': 'UZ', 'Pakistan ': 'PK', 'Palaos ': 'PW', 'Palestine ': 'PS', 'Panama ': 'PA', 'Papouasie - Nouvelle - Guinée ': 'PG', 'Paraguay ': 'PY', 'Pays - Bas ': 'NL', 'Pérou ': 'PE', 'Philippines ': 'PH', 'Pitcairn ': 'PN', 'Pologne ': 'PL', 'Polynésie française ': 'PF', 'Porto Rico ': 'PR', 'Portugal': 'PT', 'Qatar ': 'QA', 'Syrie ': 'SY', 'République centrafricaine ': 'CF', 'Réunion ': 'RE', 'Roumanie ': 'RO', "Royaume-Uni ": 'GB', 'Russie ': 'RU', 'Rwanda ': 'RW', 'Sahara occidental ': 'EH', 'Saint-Barthélemy ': 'BL', 'Saint-Kitts-et-Nevis ': 'KN', 'Saint-Marin ': 'SM', 'Saint-Pierre-et-Miquelon ': 'PM', 'Saint-Siège (Vatican) ': 'VA', 'Saint-Vincent-et-les-Grenadines ': 'VC', 'Sainte-Hélène ': 'SH', 'Sainte-Lucie ': 'LC', 'Iles Salomon ': 'SB', 'Samoa ': 'WS', 'Samoa américaines ': 'AS', 'Sao Tomé-et-Principe ': 'ST', 'Sénégal ': 'SN', 'Serbie ': 'RS', 'Seychelles ': 'SC', 'Sierra Leone ': 'SL', 'Singapour ': 'SG', 'Slovaquie ': 'SK', 'Slovénie ': 'SI', 'Somalie ': 'SO', 'Soudan ': 'SD', 'Soudan du Sud ': 'SS', 'Sri Lanka ': 'LK', 'Suède ': 'SE', 'Suisse ': 'CH', 'Suriname ': 'SR', 'Eswatini (Ex Swaziland) ': 'SZ', 'Tadjikistan ': 'TJ', 'Taïwan ': 'TW', 'Tanzanie ': 'TZ', 'Tchad ': 'TD', 'République Tchèque ': 'CZ', 'Terres australes françaises ': 'TF', 'Thaïlande ': 'TH', 'Timor oriental ': 'TL', 'Togo ': 'TG', 'Tokelau ': 'TK', 'Tonga ': 'TO', 'Trinité-et-Tobago ': 'TT', 'Tunisie ': 'TN', 'Turkménistan ': 'TM', 'Iles Turks-et-Caïcos ': 'TC', 'Turquie ': 'TR', 'Tuvalu ': 'TV', 'Ukraine ': 'UA', 'Uruguay ': 'UY', 'Vanuatu ': 'VU', 'Venezuela ': 'VE', 'Viet Nam ': 'VN', 'Wallis et Futuna ': 'WF', 'Yémen ': 'YE', 'Zambie ': 'ZM', 'Zimbabwe ': 'ZW'
     }
 
     liste = document.getElementById("pays")
@@ -709,12 +672,56 @@ function game() {
         liste.appendChild(pays)
     }
 
-    p = Math.random()
+    if (localStorage.getItem("Marathon")) {
+        marathon = JSON.parse(localStorage.getItem("Marathon"));
+        if (marathon.hasOwnProperty("Running")) {
+            if (marathon["Running"] == "1") {
+                indexes = marathon["index"];
+                vie = marathon["nbr"];
+                timerLive = JSON.parse(localStorage.Marathon)["time"];
+            }
+            else {
 
-    index = Math.floor(p * (Object.keys(countries).length - 1))
+                indexes = Array.from(Array(Object.keys(countries).length).keys());
+                indexes = indexes.sort((a, b) => 0.5 - Math.random());
+                vie = 0;
+                timerLive = '0:0:0';
+            }
+        } else {
+
+            indexes = Array.from(Array(Object.keys(countries).length).keys());
+            indexes = indexes.sort((a, b) => 0.5 - Math.random());
+            vie = 0;
+            timerLive = '0:0:0';
+
+        }
+    } else {
+        timerLive = '0:0:0';
+        localStorage.setItem("Marathon", "{}");
+        marathon = JSON.parse(localStorage.getItem("Marathon"));
+
+        indexes = Array.from(Array(Object.keys(countries).length).keys());
+        indexes = indexes.sort((a, b) => 0.5 - Math.random());
+        vie = 0;
+
+
+    }
+
+    if (vie == 0) {
+        marathon["nbr"] = 0;
+    }
+    marathon["Running"] = "0";
+    marathon["index"] = indexes;
+    marathon['time'] = timerLive;
+    localStorage.setItem("Marathon", JSON.stringify(marathon));
+
+    console.log(vie);
+
+
+    index = indexes[vie];
 
     CHOSENPAYISO = countries[Object.keys(countries)[index]].toLowerCase()
-    //CHOSENPAYISO = "sm"
+    // CHOSENPAYISO = "st"
 
 
 
@@ -746,6 +753,40 @@ function game() {
     index = Math.floor(p * (colors.length - 1))
     col = colors[index]
     document.getElementById("L2").style["color"] = col;
+    let h4 = document.getElementsByTagName('h4')[0];
+    if (JSON.parse(localStorage.Marathon).hasOwnProperty("time")) {
+        h4.textContent = timerLive;
+    }
+
+
+
+
+    [hrs, min, sec] = h4.textContent.split(':');
+    var t;
+
+    function tick() {
+        sec++;
+        if (sec >= 60) {
+            sec = 0;
+            min++;
+            if (min >= 60) {
+                min = 0;
+                hrs++;
+            }
+        }
+    }
+    function add() {
+        tick();
+        h4.textContent = (hrs > 9 || hrs == 0 || hrs.length == 2 ? hrs : "0" + hrs)
+            + ":" + (min > 9 || min == 0 || min.length == 2 ? min : "0" + min)
+            + ":" + (sec > 9 || sec == 0 || sec.length == 2 ? sec : "0" + sec);
+        timer();
+    }
+    function timer() {
+        t = setTimeout(add, 1000);
+    }
+    timer();
+    document.getElementById("nbrDrapeau").innerHTML = "Drapeau numéro: " + String(JSON.parse(localStorage.Marathon)["nbr"] + 1) + "/" + Object.keys(countries).length;
 
 }
 
@@ -770,7 +811,30 @@ close.addEventListener('click', () => {
 
 pix = document.getElementById("open").offsetHeight
 
-document.getElementById("page-header").style['height'] = String(pix + 6) + "px"
+document.getElementById("page-header").style['height'] = String(pix + 6) + "px";
 
 
-game()
+window.addEventListener("orientationchange", function () {
+    // Announce the new orientation number
+    location.reload();
+}, false);
+/*
+
+
+if (screen.availHeight > screen.availWidth) {
+    document.body.innerHTML = "<img src='tilt.gif'>";
+    document.body.style['background-color'] = "black";
+
+
+}
+else {
+
+    screen.orientation.lock()
+    game()
+}
+*/
+
+
+
+
+game();
