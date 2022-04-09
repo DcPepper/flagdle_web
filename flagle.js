@@ -177,7 +177,7 @@ function game() {
         , "#dd7500"
         , "#ffffff"
         , "#000000"
-        , "#ff0000"
+        , "#D52B1E"
         , "#800000"
         , "#808080"
         , "#bfb373"]
@@ -387,7 +387,7 @@ function game() {
             if (trueColor.includes(str)) {
                 pixelsCol[i] = [200, 200, 200, 255];
             } else {
-                pixelsCol[i] = [1, 1, 1, 255];
+                pixelsCol[i] = [99, 100, 101, 255];
             }
         }
 
@@ -721,7 +721,7 @@ function game() {
     index = indexes[vie];
 
     CHOSENPAYISO = countries[Object.keys(countries)[index]].toLowerCase()
-    // CHOSENPAYISO = "st"
+    //CHOSENPAYISO = "ca"
 
 
 
