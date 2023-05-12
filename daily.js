@@ -1227,7 +1227,7 @@ function game() {
     date = date.toJSON().slice(0, 10);
     jour = new Date();
     jourJSON = jour.toJSON().slice(0, 10);
-    depart = "2023-05-11"
+    depart = "2023-05-05"
     jours = [];
     while (jourJSON != depart) {
         jour.setDate(jour.getDate() - 1);
