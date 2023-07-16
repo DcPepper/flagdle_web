@@ -43,7 +43,7 @@ function game() {
 
         div = document.querySelector("textarea");
         div.innerHTML = text.join('\n');
-        div.innerHTML += '\nhttps://dcpepper.fr/flagle';
+        div.innerHTML += '\nhttps://dcpepper.github.io/flagdle_web/dailyFlag.html';
         div.select();
         navigator.clipboard.writeText(div.innerHTML);
 
