@@ -1,3 +1,4 @@
+/*
 @media only screen and (orientation:portrait) {
     #turn { 
         display:none;
@@ -17,6 +18,9 @@
     #turn { display:block; }
     #turnnot { display:none; }
 }
+*/
+#turn { display:block; 
+#turnnot { display:none; }
 
 .img {
     border: 2px solid;
